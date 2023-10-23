@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------- Relative Fonts -----------------*/
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 400;
+
+  src:
+    local("Rubik Regular"),
+    local("Rubik-Regular"),
+    url(../assets/fonts/Rubik-Regular.ttf) format("truetype");
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 500;
+
+  src:
+    local("Rubik Medium"),
+    local("Rubik-Medium"),
+    url(../assets/fonts/Rubik-Medium.ttf) format("truetype");
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 700;
+
+  src:
+    local("Rubik Bold"),
+    local("Rubik-Bold"),
+    url(../assets/fonts/Rubik-Bold.ttf) format("truetype");
+
+  font-display: swap;
+}
+.filterDel:hover {
+  filter: invert(64%) sepia(70%) saturate(1024%) hue-rotate(307deg)
+    brightness(83%) contrast(128%);
+}
+
+/* Custom Scrollbar */
+
+::-webkit-scrollbar {
+  width: 0.15rem;
+}
+
+
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(238, 40%, 52%);
+  border-radius: 1.25rem;
+  border: 0.1875rem solid transparent;
+  /* background-clip: content-box; */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: #2acfcf;
+  border-radius: 10rem;
+}
+
+/* .modal-box{
+  border-radius: 0.3rem;
+} */
