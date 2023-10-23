@@ -15,17 +15,13 @@ export default function User() {
   const initComment =
     "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You’ve nailed the design and the responsiveness at various breakpoints works really well.";
 
-  const [formData, setFormData] = useState({
-    comment: initComment,
-  });
-  const {comment} = formData.comment;
+  const [comment, setComment] = useState(initComment);
 
-  const updateComment = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const editComment = (e) => {
+    setComment(e.target.value);
+  };
+
+  const updateComment = () => {
     setisModified((prev) => {
       return { ...prev, isEditing: false };
     });
@@ -49,43 +45,38 @@ export default function User() {
         )}
         <span className="pl-4 text-grayish-blue">1 month ago</span>
       </div>
+      {isEditing ? (
+        <textarea
+          className="comment-editing flex h-[10rem] resize-none items-center justify-center overflow-auto rounded-sm border px-2 py-1 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
+          value={comment}
+          onChange={editComment}
+        />
+      ) : (
+        <p className="comment-actual text-grayish-blue">{comment}</p>
+      )}
 
-      <form onSubmit={updateComment} action="">
-        {isEditing ? (
-          <textarea
-            className="comment-editing flex h-[10rem] resize-none items-center justify-center overflow-auto rounded-sm border px-2 py-1 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
-            value={comment}
-            // onChange={editComment}
-          />
-        ) : (
-          <p className="comment-actual text-grayish-blue">{comment}</p>
-        )}
-
-
-        {isEditing ? (
-          <button
-            type="submit"
-            className="btn btn-sm ml-auto w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80"
-          >
-            Update
-          </button>
-          
-        ) : (
-          <div className="btnss flex items-center justify-between">
-            <Vote />
-            {isCurrentUser ? (
-              <div className="flex">
-                <IconButton btnIndex="0" action={setisModified} />
-                <ConfirmationModal />
-                
-                <IconButton btnIndex="1" action={setisModified} />
-              </div>
-            ) : (
-              <IconButton btnIndex="2" />
-            )}
-          </div>
-        )}
-      
+      {isEditing ? (
+        <button
+          type="submit"
+          onClick={updateComment}
+          className="btn btn-sm ml-auto w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80"
+        >
+          Update
+        </button>
+      ) : (
+        <div className="btnss flex items-center justify-between">
+          <Vote />
+          {isCurrentUser ? (
+            <div className="flex">
+              <IconButton btnIndex="0" action={setisModified} />
+              <ConfirmationModal />
+              <IconButton btnIndex="1" action={setisModified} />
+            </div>
+          ) : (
+            <IconButton btnIndex="2" />
+          )}
+        </div>
+      )}
     </div>
   );
 }
