@@ -5,22 +5,29 @@ import Vote from "./Vote";
 import ConfirmationModal from "./ConfirmationModal";
 import Filter from "bad-words";
 import errorCommentData from "../data/errorCommentData";
+// import CommentTypeContext from "../context/CommentTypeContext";
 
 // import useTextCensor from "../hooks/useTextCensor";
 
-export default function User() {
+export default function User({ commentType }) {
+  // const commentType = useContext(CommentTypeContext);
+
   const filter = new Filter();
   const [charCount, setcharCount] = useState();
 
   let isCurrentUser = true;
+
   const [isModified, setisModified] = useState({
     isDeleting: false,
     isEditing: false,
   });
+
   const { isDeleting, isEditing } = isModified;
 
   const initComment =
-    "Impressive! shit Though it seems the drag feature could be improved. But overall it looks incredible. You’ve nailed the design and the responsiveness at various breakpoints works really well.";
+    commentType === "update"
+      ? "Impressive! shit Though it seems the drag feature could be improved. But overall it looks incredible. You’ve nailed the design and the responsiveness at various breakpoints works really well."
+      : "";
 
   const [formData, setFormData] = useState({
     comment: initComment,
@@ -41,9 +48,10 @@ export default function User() {
   const updateComment = (e) => {
     e.preventDefault();
 
-    setisModified((prev) => {
-      return { ...prev, isEditing: false };
-    });
+    !commentError &&
+      setisModified((prev) => {
+        return { ...prev, isEditing: false };
+      });
   };
 
   const editComment = (e) => {
@@ -67,8 +75,12 @@ export default function User() {
   };
 
   return (
-    <div className="user-comment grid  max-w-[343px] place-content-center gap-4 rounded-lg bg-white p-4">
-      <div className="flex items-center">
+    <div
+      className={`user-comment grid   max-w-[343px] gap-4 rounded-lg bg-white p-4`}
+    >
+      <div
+        className={`${commentType === "send" && "hidden"} flex items-center `}
+      >
         <figure className="flex items-center gap-4 pr-2 font-medium">
           <img
             className="w-8 rounded-full"
@@ -85,29 +97,50 @@ export default function User() {
         <span className="pl-4 text-grayish-blue">1 month ago</span>
       </div>
 
-      {isEditing ? (
+      {(commentType === "update" ? isEditing : !isEditing) ? (
         <form className="relative" onSubmit={updateComment}>
           <textarea
             name="comment"
             className="comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-sm border border-red-500  p-2 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
             value={comment}
             onChange={editComment}
-            placeholder="Add your Comment here..."
+            placeholder="Add a comment..."
           />
+
           <small className="absolute -top-4 right-3 text-slate-400 ">
             {charCount}
           </small>
+          <small className="error-comment visible mt-2 self-start italic text-red-500">
+            {commentError}
+          </small>
+
           <div className="flex items-center justify-between pt-3">
-            <small className="error-comment visible -mt-2 self-start italic text-red-500">
-              {commentError}
-            </small>
+            {/* <div className="flex w-full justify-between pt-3"> */}
+            <figure
+              className={`${
+                commentType === "update" && "hidden"
+              } flex items-center gap-4 pr-2 font-medium`}
+            >
+              <img
+                className="w-8 rounded-full"
+                src="/src/assets/images/avatars/image-amyrobson.webp"
+                alt="avatar of a smiling curly hair girl with sunglasses"
+              />
+              <figcaption className="sr-only text-dark-blue">
+                amyrobson
+              </figcaption>
+            </figure>
             <button
               type="submit"
-              className="btn btn-sm  w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80"
+              className={`${
+                commentType === "send" && "h-fit px-7 py-3"
+              } btn btn-sm ml-auto  w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80`}
+              disabled={commentError}
             >
-              Update
+              {commentType === "update" ? "Update" : "Send"}
             </button>
           </div>
+          {/* </div> */}
         </form>
       ) : (
         <>
