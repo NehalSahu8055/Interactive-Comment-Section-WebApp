@@ -19,6 +19,8 @@ export default function IconButton({ btnIndex, action }) {
             action((prev) => {
               return { ...prev, isReplying: true };
             });
+
+           
           }
         }}
         key={btn.id}

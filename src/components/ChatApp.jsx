@@ -4,7 +4,7 @@ import CommentBox from "./CommentBox";
 
 export default function ChatApp() {
   return (
-    <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
+    <main className="grid  min-h-screen place-content-center bg-very-light-gray font-rubik">
       <UpdateCommentContext.Provider value={"update"}>
         <CommentBox />
       </UpdateCommentContext.Provider>

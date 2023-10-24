@@ -7,7 +7,7 @@ import Filter from "bad-words";
 import errorCommentData from "../data/errorCommentData";
 import SendCommentContext from "../context/SendCommentContext";
 import UpdateCommentContext from "../context/UpdateCommentContext";
-import CommentBox from "../components/CommentBox";
+// import CommentBox from "../components/CommentBox";
 import ReplyBox from "./ReplyBox";
 
 // import useTextCensor from "../hooks/useTextCensor";
@@ -85,14 +85,19 @@ export default function User() {
         <div
           className={`${commentType === "send" && "hidden"} flex items-center `}
         >
-          <figure className="flex items-center gap-4 pr-2 font-medium">
-            <img
-              className="w-8 rounded-full"
-              src="/src/assets/images/avatars/image-amyrobson.webp"
-              alt="avatar of a smiling curly hair girl with sunglasses"
-            />
-            <figcaption className="text-dark-blue">amyrobson</figcaption>
-          </figure>
+          <a
+            href="#"
+            className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
+          >
+            <figure className="flex items-center gap-4 pr-1  font-medium">
+              <img
+                className="w-8 rounded-full"
+                src="/src/assets/images/avatars/image-amyrobson.webp"
+                alt="avatar of a smiling girl with curly hair wearing sunglasses"
+              />
+              <figcaption className="text-dark-blue">amyrobson</figcaption>
+            </figure>
+          </a>
           {isCurrentUser && (
             <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
               you
@@ -120,20 +125,24 @@ export default function User() {
 
             <div className="flex items-center justify-between pt-3">
               {/* <div className="flex w-full justify-between pt-3"> */}
-              <figure
-                className={`${
-                  commentType === "update" && "hidden"
-                } flex items-center gap-4 pr-2 font-medium`}
-              >
-                <img
-                  className="w-8 rounded-full"
-                  src="/src/assets/images/avatars/image-amyrobson.webp"
-                  alt="avatar of a smiling curly hair girl with sunglasses"
-                />
-                <figcaption className="sr-only text-dark-blue">
-                  amyrobson
-                </figcaption>
-              </figure>
+
+              <a href="#" className="cursor-pointer">
+                <figure
+                  className={`${
+                    commentType === "update" && "hidden"
+                  } flex items-center gap-4 rounded-full p-1 pr-2 font-medium hover:bg-light-gray`}
+                >
+                  <img
+                    className="w-8 rounded-full"
+                    src="/src/assets/images/avatars/image-amyrobson.webp"
+                    alt="avatar of a smiling curly hair girl with sunglasses"
+                  />
+                  <figcaption className="sr-only text-dark-blue">
+                    amyrobson
+                  </figcaption>
+                </figure>
+              </a>
+
               <button
                 type="submit"
                 className={`${
