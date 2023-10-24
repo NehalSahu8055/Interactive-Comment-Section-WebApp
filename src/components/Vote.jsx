@@ -36,7 +36,7 @@ export default function Vote() {
       );
     } else if (voteType === "downvotes") {
       downvote();
-      e.currentTarget.classList.add("brightness-50", "saturate-[5]");
+      // e.currentTarget.classList.add("brightness-50", "saturate-[5]");
       e.currentTarget.parentNode.firstElementChild.classList.remove(
         "brightness-50",
         "saturate-[5]",

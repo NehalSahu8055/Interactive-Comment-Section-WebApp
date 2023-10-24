@@ -1,28 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "../data/data.json";
 import IconButton from "./IconButton";
 import Vote from "./Vote";
 import ConfirmationModal from "./ConfirmationModal";
 import Filter from "bad-words";
 import errorCommentData from "../data/errorCommentData";
-// import CommentTypeContext from "../context/CommentTypeContext";
+import SendCommentContext from "../context/SendCommentContext";
+import UpdateCommentContext from "../context/UpdateCommentContext";
+import CommentBox from "../components/CommentBox";
+import ReplyBox from "./ReplyBox";
 
 // import useTextCensor from "../hooks/useTextCensor";
 
-export default function User({ commentType }) {
-  // const commentType = useContext(CommentTypeContext);
+export default function User() {
+  const commentType =
+    useContext(SendCommentContext) || useContext(UpdateCommentContext);
 
   const filter = new Filter();
   const [charCount, setcharCount] = useState();
 
-  let isCurrentUser = true;
+  let isCurrentUser = false;
 
   const [isModified, setisModified] = useState({
     isDeleting: false,
     isEditing: false,
+    isReplying: false,
   });
 
-  const { isDeleting, isEditing } = isModified;
+  const { isDeleting, isEditing, isReplying } = isModified;
 
   const initComment =
     commentType === "update"
@@ -75,93 +80,98 @@ export default function User({ commentType }) {
   };
 
   return (
-    <div
-      className={`user-comment grid   max-w-[343px] gap-4 rounded-lg bg-white p-4`}
-    >
-      <div
-        className={`${commentType === "send" && "hidden"} flex items-center `}
-      >
-        <figure className="flex items-center gap-4 pr-2 font-medium">
-          <img
-            className="w-8 rounded-full"
-            src="/src/assets/images/avatars/image-amyrobson.webp"
-            alt="avatar of a smiling curly hair girl with sunglasses"
-          />
-          <figcaption className="text-dark-blue">amyrobson</figcaption>
-        </figure>
-        {isCurrentUser && (
-          <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
-            you
-          </div>
+    <div className="flex max-w-[343px] flex-col gap-4">
+      <div className={`user-comment grid   gap-4 rounded-lg bg-white p-4`}>
+        <div
+          className={`${commentType === "send" && "hidden"} flex items-center `}
+        >
+          <figure className="flex items-center gap-4 pr-2 font-medium">
+            <img
+              className="w-8 rounded-full"
+              src="/src/assets/images/avatars/image-amyrobson.webp"
+              alt="avatar of a smiling curly hair girl with sunglasses"
+            />
+            <figcaption className="text-dark-blue">amyrobson</figcaption>
+          </figure>
+          {isCurrentUser && (
+            <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
+              you
+            </div>
+          )}
+          <span className="pl-4 text-grayish-blue">1 month ago</span>
+        </div>
+
+        {(commentType === "update" ? isEditing : !isEditing) ? (
+          <form className="relative" onSubmit={updateComment}>
+            <textarea
+              name="comment"
+              className="comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-sm border border-red-500  p-2 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
+              value={comment}
+              onChange={editComment}
+              placeholder="Add a comment..."
+            />
+
+            <small className="absolute -top-4 right-3 text-slate-400 ">
+              {charCount}
+            </small>
+            <small className="error-comment visible mt-2 self-start italic text-red-500">
+              {commentError}
+            </small>
+
+            <div className="flex items-center justify-between pt-3">
+              {/* <div className="flex w-full justify-between pt-3"> */}
+              <figure
+                className={`${
+                  commentType === "update" && "hidden"
+                } flex items-center gap-4 pr-2 font-medium`}
+              >
+                <img
+                  className="w-8 rounded-full"
+                  src="/src/assets/images/avatars/image-amyrobson.webp"
+                  alt="avatar of a smiling curly hair girl with sunglasses"
+                />
+                <figcaption className="sr-only text-dark-blue">
+                  amyrobson
+                </figcaption>
+              </figure>
+              <button
+                type="submit"
+                className={`${
+                  commentType === "send" && "h-fit px-7 py-3"
+                } btn btn-sm ml-auto  w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80`}
+                disabled={commentError}
+              >
+                {commentType === "update" ? "Update" : "Send"}
+              </button>
+            </div>
+            {/* </div> */}
+          </form>
+        ) : (
+          <>
+            <p className="comment-actual text-grayish-blue">
+              {filter.clean(comment)}
+            </p>
+            <div className="btnss flex items-center justify-between">
+              <Vote />
+              {isCurrentUser ? (
+                <div className="flex">
+                  <IconButton btnIndex="0" action={setisModified} />
+                  <ConfirmationModal />
+
+                  <IconButton btnIndex="1" action={setisModified} />
+                </div>
+              ) : (
+                <>
+                  <IconButton btnIndex="2" action={setisModified} />
+                </>
+              )}
+            </div>
+          </>
         )}
-        <span className="pl-4 text-grayish-blue">1 month ago</span>
       </div>
 
-      {(commentType === "update" ? isEditing : !isEditing) ? (
-        <form className="relative" onSubmit={updateComment}>
-          <textarea
-            name="comment"
-            className="comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-sm border border-red-500  p-2 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
-            value={comment}
-            onChange={editComment}
-            placeholder="Add a comment..."
-          />
-
-          <small className="absolute -top-4 right-3 text-slate-400 ">
-            {charCount}
-          </small>
-          <small className="error-comment visible mt-2 self-start italic text-red-500">
-            {commentError}
-          </small>
-
-          <div className="flex items-center justify-between pt-3">
-            {/* <div className="flex w-full justify-between pt-3"> */}
-            <figure
-              className={`${
-                commentType === "update" && "hidden"
-              } flex items-center gap-4 pr-2 font-medium`}
-            >
-              <img
-                className="w-8 rounded-full"
-                src="/src/assets/images/avatars/image-amyrobson.webp"
-                alt="avatar of a smiling curly hair girl with sunglasses"
-              />
-              <figcaption className="sr-only text-dark-blue">
-                amyrobson
-              </figcaption>
-            </figure>
-            <button
-              type="submit"
-              className={`${
-                commentType === "send" && "h-fit px-7 py-3"
-              } btn btn-sm ml-auto  w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80`}
-              disabled={commentError}
-            >
-              {commentType === "update" ? "Update" : "Send"}
-            </button>
-          </div>
-          {/* </div> */}
-        </form>
-      ) : (
-        <>
-          <p className="comment-actual text-grayish-blue">
-            {filter.clean(comment)}
-          </p>
-          <div className="btnss flex items-center justify-between">
-            <Vote />
-            {isCurrentUser ? (
-              <div className="flex">
-                <IconButton btnIndex="0" action={setisModified} />
-                <ConfirmationModal />
-
-                <IconButton btnIndex="1" action={setisModified} />
-              </div>
-            ) : (
-              <IconButton btnIndex="2" />
-            )}
-          </div>
-        </>
-      )}
+      {/* Replying Part */}
+      {isReplying && <ReplyBox />}
     </div>
   );
 }

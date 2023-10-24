@@ -1,13 +1,5 @@
 import React, { createContext, useState } from "react";
 
-const UpdateContext = createContext();
+const UpdateCommentContext = createContext();
 
-export function UpdateContextProvider(props) {
-  return (
-    <UpdateContext.Provider value={"update"}>
-      {props.children}
-    </UpdateContext.Provider>
-  );
-}
-
-export default UpdateContext;
+export default UpdateCommentContext;

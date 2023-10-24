@@ -6,7 +6,7 @@ const data = [
     {
         label: "maxCharLimit",
         error: "Max Char Limit Exceeded",
-        MAX_CHARS_COMMENT: "200"
+        MAX_CHARS_COMMENT: "201"
     },
 ]
 

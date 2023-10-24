@@ -1,16 +1,16 @@
-// import SendCommentContextProvider from "../context/SendCommentContext";
-// import UpdateCOmmentContextProvider from "../context/UpdateCommentContext";
-import ChatBox from "./ChatBox";
+import SendCommentContext from "../context/SendCommentContext";
+import UpdateCommentContext from "../context/UpdateCommentContext";
+import CommentBox from "./CommentBox";
 
 export default function ChatApp() {
   return (
     <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
-      {/* <SendCommentContextProvider> */}
-        <ChatBox commentType={"update"} />
-      {/* </SendCommentContextProvider> */}
-      {/* <UpdateCommentContextProvider> */}
-        <ChatBox commentType={"send"} />
-      {/* </UpdateCommentContextProvider> */}
+      <UpdateCommentContext.Provider value={"update"}>
+        <CommentBox />
+      </UpdateCommentContext.Provider>
+      {/* <SendCommentContext.Provider value={"send"}>
+        <CommentBox />
+      </SendCommentContext.Provider> */}
     </main>
   );
 }

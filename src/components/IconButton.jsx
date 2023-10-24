@@ -15,6 +15,11 @@ export default function IconButton({ btnIndex, action }) {
             action((prev) => {
               return { ...prev, isEditing: true };
             });
+          else {
+            action((prev) => {
+              return { ...prev, isReplying: true };
+            });
+          }
         }}
         key={btn.id}
         className={`group btn btn-sm   flex items-center capitalize  ${
