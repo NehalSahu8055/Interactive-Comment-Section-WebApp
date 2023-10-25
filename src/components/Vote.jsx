@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import useVoting from "../hooks/useVoting";
 
-export default function Vote() {
+export default function Vote({ score }) {
   const [hasVoted, sethasVoted] = useState({
     upvotes: false,
     downvotes: false,
   });
-  const { state, upvote, downvote } = useVoting(12);
+  const { state, upvote, downvote } = useVoting(score);
 
   const toggleVote = (e) => {
     const voteType = e.currentTarget.dataset.vote;
@@ -43,6 +43,7 @@ export default function Vote() {
       );
     }
   };
+
   return (
     <div className="vote-counter flex w-fit items-center rounded-lg bg-very-light-gray font-medium text-moderate-blue">
       <button

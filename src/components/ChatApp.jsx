@@ -11,6 +11,7 @@ export default function ChatApp() {
       {/* <SendCommentContext.Provider value={"send"}>
         <CommentBox />
       </SendCommentContext.Provider> */}
+
     </main>
   );
 }
