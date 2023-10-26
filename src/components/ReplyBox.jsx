@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import SendCommentContext from "../context/SendCommentContext";
 import CommentBox from "./CommentBox";
 import CommentCard from "./CommentCard";
-export default function ReplyBox() {
-  // const commentID = useId();
-  // const toggleCommentID = useId();
-  // const replyBoxID = useId();
-
+export default function ReplyBox({ replyCard}) {
   const [isExpanded, setisExpanded] = useState(true);
 
   const toggleComment = (e) => {
@@ -63,7 +59,8 @@ export default function ReplyBox() {
       >
         <SendCommentContext.Provider value={"update"}>
           {/* <CommentCard id={2} /> */}
-          <CommentBox />
+          {replyCard}
+          {/* {console.log(replyCard)} */}
         </SendCommentContext.Provider>
       </div>
     </div>

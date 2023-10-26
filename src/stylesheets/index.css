@@ -47,17 +47,22 @@
 /* Custom Scrollbar */
 /* WebKit Browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-  width: 0.15rem;
+  width: 0.7rem;
 }
+
+::-webkit-scrollbar-track {
+  border: 0;
+}
+
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(238, 40%, 52%);
+  background-color: rgba(192, 184, 184, 0.66);
   border-radius: 1.25rem;
   border: 0.1875rem solid transparent;
+  background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
-  background-color: hsl(238, 40%, 52%);
-  border-radius: 10rem;
+  background-color: rgba(192, 184, 184, 0.66);
 }
 
 /* Firefox */
@@ -66,18 +71,18 @@
    It may not work on Windows or other platforms. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(238, 40%, 52%) transparent;
+  scrollbar-color: rgba(192, 184, 184, 0.66) transparent;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background-color: hsla(237, 28%, 53%, 0.673);
+  background-color: rgba(192, 184, 184, 0.795);
 }
 
 /* Microsoft Edge */
 /* Edge does not support customizing scrollbars directly either.
-   This code is only for reference and may not work on all versions of Edge. */
+   This may not work on all versions of Edge. */
 * {
   -ms-overflow-style: none; /* Hide default scrollbar in Edge */
 }
 *::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(238, 40%, 52%);
+  background-color: rgba(192, 184, 184, 0.795);
 }
