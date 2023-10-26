@@ -28,7 +28,7 @@ export default function CommentContextProvider(props) {
       : "";
 
   const [formData, setFormData] = useState({
-    comment: initComment,
+    comment: "",
   });
 
   const { comment } = formData;

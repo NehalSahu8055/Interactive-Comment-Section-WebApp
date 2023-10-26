@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SendCommentContext from "../context/SendCommentContext";
 import CommentBox from "./CommentBox";
-
+import CommentCard from "./CommentCard";
 export default function ReplyBox() {
   // const commentID = useId();
   // const toggleCommentID = useId();
@@ -62,6 +62,7 @@ export default function ReplyBox() {
         id="commentID"
       >
         <SendCommentContext.Provider value={"update"}>
+          {/* <CommentCard id={2} /> */}
           <CommentBox />
         </SendCommentContext.Provider>
       </div>

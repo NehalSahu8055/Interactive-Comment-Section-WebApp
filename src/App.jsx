@@ -1,6 +1,12 @@
 import React from "react";
 import ChatApp from "./components/ChatApp";
 import "./stylesheets/index.css";
+import ErrorBoundary from "./utils/ErrorBoundary";
+
 export default function App() {
-  return <ChatApp />;
+  return (
+    <ErrorBoundary>
+      <ChatApp />
+    </ErrorBoundary>
+  );
 }
