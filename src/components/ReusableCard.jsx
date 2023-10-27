@@ -12,8 +12,11 @@ import Picker from "@emoji-mart/react";
 import { MdAddReaction } from "react-icons/md";
 import data from "../data/data.json";
 import useEmojiPicker from "../hooks/useEmojiPicker";
+import CurrentUserContext from "../context/CurrentUserContext";
 
 export default function ReusableCard({ person }) {
+  const { currentUserID, switchUser } = useContext(CurrentUserContext);
+
   const {
     id,
     content,
@@ -29,7 +32,7 @@ export default function ReusableCard({ person }) {
   const filter = new Filter();
   const [charCount, setcharCount] = useState();
 
-  const { id: c_id, image: c_image, username: c_username } = data.currentUser;
+  switchUser(data.currentUser.id);
 
   const [isModified, setisModified] = useState({
     isDeleting: false,
@@ -82,7 +85,7 @@ export default function ReusableCard({ person }) {
       : setcommentError(maxCharLmtError);
   };
 
-  const isCurrentUser = id === 2;
+  const isCurrentUser = id === currentUserID;
 
   /**
    * Emoji Picker Functions
@@ -95,7 +98,7 @@ export default function ReusableCard({ person }) {
 
   return (
     <>
-      {/* id == c_id && */}
+      {/* id == currentUserID && */}
       <div
         key={id}
         className={`user-comment space-y-4  rounded-lg bg-white p-4 `}

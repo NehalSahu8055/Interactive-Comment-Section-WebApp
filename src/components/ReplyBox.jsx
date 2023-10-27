@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SendCommentContext from "../context/SendCommentContext";
 import CommentBox from "./CommentBox";
 import CommentCard from "./CommentCard";
+import ReusableCard from "./ReusableCard";
 export default function ReplyBox({ replyCard }) {
   const [isExpanded, setisExpanded] = useState(true);
 
@@ -54,6 +55,7 @@ export default function ReplyBox({ replyCard }) {
         <SendCommentContext.Provider value={"update"}>
           {/* <CommentCard id={2} /> */}
           {replyCard}
+
           {/* {console.log(replyCard)} */}
         </SendCommentContext.Provider>
       </div>

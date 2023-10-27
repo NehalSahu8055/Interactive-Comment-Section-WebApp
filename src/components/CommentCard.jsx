@@ -8,12 +8,13 @@ export default function CommentCard({ cardID }) {
   const comment = data.comments.find((person) => person.id === cardID);
 
   console.log(cardID);
-  
+
   return (
     <>
-      {/* {console.log()} */}
+      {/* Handling comments  */}
       <ReusableCard person={comment} />
 
+      {/* Handling replies under comment  */}
       {comment.replies.length > 0 && (
         <ReplyBox
           replyCard={comment.replies.map((reply) => (

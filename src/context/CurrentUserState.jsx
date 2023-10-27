@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import CurrentUserContext from "./CurrentUserContext";
 
 export default function CurrentUserState(props) {
-  const [state, setState] = useState(1);
-  const changeCurrentUser = (userID) => {
-    setState(userID);
+  const [currentUserID, setCurrentUserID] = useState(1);
+  const switchUser = (userID) => {
+    setCurrentUserID(userID);
   };
 
   return (
-    <CurrentUserContext.Provider value={{ state, changeCurrentUser }}>
+    <CurrentUserContext.Provider value={{ currentUserID, switchUser }}>
       {props.children}
     </CurrentUserContext.Provider>
   );
