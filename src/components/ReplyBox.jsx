@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SendCommentContext from "../context/SendCommentContext";
 import CommentBox from "./CommentBox";
 import CommentCard from "./CommentCard";
-export default function ReplyBox({ replyCard}) {
+export default function ReplyBox({ replyCard }) {
   const [isExpanded, setisExpanded] = useState(true);
 
   const toggleComment = (e) => {
@@ -11,12 +11,6 @@ export default function ReplyBox({ replyCard}) {
     e.currentTarget.dataset.tip = !isExpanded
       ? "Collapse Comment"
       : "Expand Comment";
-
-    // Toggling Comment
-    // Another Nonaccessible  Way to do the same
-    // const childElements = parent.children;
-    // [...childElements].forEach((child) => {
-    //   child.classList.toggle("hidden");
 
     // Toggling Plus Minus Image for toggleComment
     const icon = e.currentTarget.children[1];
@@ -54,7 +48,7 @@ export default function ReplyBox({ replyCard}) {
       </button>
 
       <div
-        className="reply-comment hidden pl-4 peer-aria-expanded:block "
+        className="reply-comment hidden space-y-4 pl-4 pt-4 peer-aria-expanded:block "
         id="commentID"
       >
         <SendCommentContext.Provider value={"update"}>

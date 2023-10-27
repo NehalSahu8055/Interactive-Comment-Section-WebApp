@@ -6,21 +6,21 @@ import ReplyBox from "./ReplyBox";
 
 export default function CommentCard({ cardID }) {
   const comment = data.comments.find((person) => person.id === cardID);
-  console.log(cardID);
-  if (!comment) {
-    return null; // Handle the case where the comment with the specified ID is not found.
-  }
 
+  console.log(cardID);
+  
   return (
     <>
-      {/* {console.log(comment)} */}
+      {/* {console.log()} */}
       <ReusableCard person={comment} />
-      <ReplyBox
-        // key={100 + "RB"}
-        replyCard={comment.replies.map((reply) => (
-          <ReusableCard person={reply} key={reply.id} />
-        ))}
-      />
+
+      {comment.replies.length > 0 && (
+        <ReplyBox
+          replyCard={comment.replies.map((reply) => (
+            <ReusableCard person={reply} key={reply.id} />
+          ))}
+        />
+      )}
     </>
   );
 }

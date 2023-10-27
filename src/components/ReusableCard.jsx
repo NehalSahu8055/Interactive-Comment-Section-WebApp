@@ -98,7 +98,7 @@ export default function ReusableCard({ person }) {
       {/* id == c_id && */}
       <div
         key={id}
-        className={`user-comment space-y-4  rounded-lg bg-white p-4`}
+        className={`user-comment space-y-4  rounded-lg bg-white p-4 `}
       >
         <div
           className={`${commentType === "send" && "hidden"} flex items-center `}
