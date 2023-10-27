@@ -1,37 +1,28 @@
 
 import { useState } from "react";
 
-export default function useEmojiPicker(comment, formData, setFormData) {
+export default function useEmojiPicker(comment, formData, setFormData, commentError) {
 
     const [showEmoji, setShowEmoji] = useState(false);
 
-    const addEmoji = (e) => {
+    const addEmoji = (emoji) => {
         try {
-            const sym = e.unified.split("_");
-            const codeArray = [];
-
-            for (const el of sym) {
-                const codePoint = parseInt(el, 16); // Convert hex to integer
-                if (!isNaN(codePoint) && isFinite(codePoint)) {
-                    codeArray.push(codePoint);
-                }
-            }
-
-            if (codeArray.length > 0) {
-                let emoji = String.fromCodePoint(...codeArray);
+            if (emoji.native) {
+                const updatedComment = comment + emoji.native;
                 setFormData({
                     ...formData,
-                    comment: comment + emoji,
+                    comment: updatedComment,
                 });
             } else {
-                // Handle the case where the code points are not valid
-                console.error("Invalid Unicode code points");
+                // Handle the case where the emoji doesn't have a native representation
+                console.error("Emoji does not have a native representation");
             }
         } catch (error) {
             // Handle any unexpected errors that may occur
             console.error("An error occurred:", error);
         }
     };
+
 
 
 

@@ -21,6 +21,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "bad-words": "^3.0.4",
+    "emoji-aware": "^3.1.0",
     "emoji-mart": "^5.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

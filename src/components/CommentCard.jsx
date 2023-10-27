@@ -7,14 +7,14 @@ import ReplyBox from "./ReplyBox";
 export default function CommentCard({ cardID }) {
   const comment = data.comments.find((person) => person.id === cardID);
 
-  console.log(cardID);
+  // console.log(cardID);
 
   return (
     <>
-      {/* Handling comments  */}
+      {/* Handles comments  */}
       <ReusableCard person={comment} />
 
-      {/* Handling replies under comment  */}
+      {/* Handles replies under comment  */}
       {comment.replies.length > 0 && (
         <ReplyBox
           replyCard={comment.replies.map((reply) => (

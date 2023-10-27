@@ -16,7 +16,8 @@ import CurrentUserContext from "../context/CurrentUserContext";
 
 export default function ReusableCard({ person }) {
   const { currentUserID, switchUser } = useContext(CurrentUserContext);
-
+  console.log(currentUserID);
+  // switchUser(currentUserID);
   const {
     id,
     content,
@@ -30,9 +31,7 @@ export default function ReusableCard({ person }) {
     useContext(SendCommentContext) || useContext(UpdateCommentContext);
 
   const filter = new Filter();
-  const [charCount, setcharCount] = useState();
-
-  switchUser(data.currentUser.id);
+  const [charCount, setcharCount] = useState(content.length);
 
   const [isModified, setisModified] = useState({
     isDeleting: false,
@@ -68,6 +67,10 @@ export default function ReusableCard({ person }) {
   const editComment = (e) => {
     const { name, value } = e.target;
 
+    const emojiRegex =
+      /[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}|\p{Emoji}(\uFE0F)?/gu;
+    const emojis = value.match(emojiRegex);
+
     const charCount = value.length;
     setcharCount(charCount);
 
@@ -87,13 +90,13 @@ export default function ReusableCard({ person }) {
 
   const isCurrentUser = id === currentUserID;
 
-  /**
-   * Emoji Picker Functions
-   */
+  //  Handle Emoji Picker Functions [Custom Hook used]
+
   const { showEmoji, setShowEmoji, addEmoji } = useEmojiPicker(
     comment,
     formData,
     setFormData,
+    commentError,
   );
 
   return (
@@ -127,6 +130,7 @@ export default function ReusableCard({ person }) {
           <span className="pl-4 text-grayish-blue">{createdAt}</span>
         </div>
 
+        {/* Handle textarea editing */}
         {isCurrentUser &&
         (commentType === "update" ? isEditing : !isEditing) ? (
           <form className="relative" onSubmit={updateComment}>
@@ -137,8 +141,10 @@ export default function ReusableCard({ person }) {
               onChange={editComment}
               placeholder="Add a comment..."
             />
+
+            {/* Handle emoji picker */}
             {showEmoji && (
-              <div className="absolute right-2 top-full bg-very-light-gray ">
+              <div className="absolute right-2 top-full z-10 bg-very-light-gray ">
                 <Picker
                   data={emojidata}
                   onEmojiSelect={addEmoji}
@@ -146,7 +152,8 @@ export default function ReusableCard({ person }) {
                   emojiSize={20}
                   navPosition="bottom"
                   previewPosition="none"
-                  // emojiButtonColors={["#f00", "pink", "rgba(155,223,88,.7)"]}
+                  skinTonePosition="none"
+                  emojiButtonColors={["skyblue", "lightgreen", "violet"]}
                 />
               </div>
             )}
@@ -210,14 +217,16 @@ export default function ReusableCard({ person }) {
           <>
             <p className="comment-actual text-grayish-blue">
               {
-                // Filtering censored text if any
+                // Handle censored text filtering if any
                 filter.clean(comment)
               }
             </p>
 
             <div className="btnss flex items-center justify-between">
+              {/* Handle voting functions*/}
               <Vote score={score} />
 
+              {/* Handle icon buttons according to card type */}
               {isCurrentUser ? (
                 <div className="flex">
                   <IconButton btnIndex="0" action={setisModified} />
