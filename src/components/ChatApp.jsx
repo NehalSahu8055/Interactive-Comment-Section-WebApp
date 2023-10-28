@@ -15,14 +15,11 @@ export default function ChatApp() {
   return (
     <>
       <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
-        {/* <CommentContext.Provider value={"update"}>
-          <CommentBox />
-        </CommentContext.Provider> */}
-
         <CommentContext.Provider value={"update"}>
           <CommentBox />
         </CommentContext.Provider>
       </main>
+
       <aside className="fixed top-0 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10">
         <h2 className="sr-only">Sidebar</h2>
 

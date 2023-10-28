@@ -7,8 +7,6 @@ import ReplyBox from "./ReplyBox";
 export default function CommentCard({ cardID }) {
   const comment = data.comments.find((person) => person.id === cardID);
 
-  // console.log(cardID);
-
   return (
     <>
       {/* Handles comments  */}

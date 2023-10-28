@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import CommentContext from "../context/CommentContext";
-import CommentBox from "./CommentBox";
-import CommentCard from "./CommentCard";
-import ReusableCard from "./ReusableCard";
+
 export default function ReplyBox({ replyCard }) {
   const [isExpanded, setisExpanded] = useState(true);
 
@@ -12,7 +10,7 @@ export default function ReplyBox({ replyCard }) {
       ? "Collapse Comment"
       : "Expand Comment";
 
-    // Toggling Plus Minus Image for toggleComment
+    // Handle Toggling Plus Minus Image for toggleComment
     const icon = e.currentTarget.children[1];
 
     icon.src = !isExpanded
@@ -52,10 +50,7 @@ export default function ReplyBox({ replyCard }) {
         id="commentID"
       >
         <CommentContext.Provider value={"update"}>
-          {/* <CommentCard id={2} /> */}
           {replyCard}
-
-          {/* {console.log(replyCard)} */}
         </CommentContext.Provider>
       </div>
     </div>
