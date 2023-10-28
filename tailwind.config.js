@@ -8,7 +8,7 @@ export default {
       },
       colors: {
         "moderate-blue": "hsl(238, 40%, 52%)",
-        "soft-red": "hsl(358, 79%, 66%)",
+        "soft-red": "#bf5053",
         "light-grayish-blue": "hsl(239, 57%, 85%)",
         "pale-red": "hsl(357, 100%, 86%)",
         "dark-blue": "hsl(212, 24%, 26%)",

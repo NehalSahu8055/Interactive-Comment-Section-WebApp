@@ -64,10 +64,6 @@ export default function ReusableCard({ person }) {
   const editComment = (e) => {
     const { name, value } = e.target;
 
-    const emojiRegex =
-      /[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}|\p{Emoji}(\uFE0F)?/gu;
-    const emojis = value.match(emojiRegex);
-
     const charCount = value.length;
     setcharCount(charCount);
 
@@ -240,7 +236,7 @@ export default function ReusableCard({ person }) {
                     <IconButton btnIndex="0" action={setisModified} />
 
                     <IconButton btnIndex="1" action={setisModified} />
-                    <ConfirmationModal setisModified={setisModified} />
+                    {/* <ConfirmationModal setisModified={setisModified} /> */}
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />

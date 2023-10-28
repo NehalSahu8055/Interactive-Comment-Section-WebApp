@@ -1,7 +1,5 @@
 import { useReducer } from "react";
 
-
-
 export default function useVoting(initState) {
   const initialState = Number(initState);
 

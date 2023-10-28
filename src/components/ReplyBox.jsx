@@ -18,6 +18,11 @@ export default function ReplyBox({ replyCard }) {
       : "/src/assets/images/icon-plus.svg";
     setisExpanded((prev) => !prev);
   };
+
+  const replyCards = [];
+
+  replyCards.push(replyCard);
+
   return (
     <div
       className="reply-box relative flex flex-col  rounded-bl-xl border-l-2  border-light-gray"
@@ -50,7 +55,7 @@ export default function ReplyBox({ replyCard }) {
         id="commentID"
       >
         <CommentContext.Provider value={"update"}>
-          {replyCard}
+          {replyCards}
         </CommentContext.Provider>
       </div>
     </div>

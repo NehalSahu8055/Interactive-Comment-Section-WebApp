@@ -14,12 +14,6 @@ export default function ChatApp() {
 
   return (
     <>
-      <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
-        <CommentContext.Provider value={"update"}>
-          <CommentBox />
-        </CommentContext.Provider>
-      </main>
-
       <aside className="fixed top-0 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10">
         <h2 className="sr-only">Sidebar</h2>
 
@@ -83,7 +77,7 @@ export default function ChatApp() {
         <div className="theme  grid place-content-center">
           <label className="swap swap-rotate fill-white">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" />
+            <input type="checkbox" aria-label="hello" />
 
             {/* sun icon */}
             <svg
@@ -105,6 +99,11 @@ export default function ChatApp() {
           </label>
         </div>
       </aside>
+      <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
+        <CommentContext.Provider value={"update"}>
+          <CommentBox />
+        </CommentContext.Provider>
+      </main>
     </>
   );
 }
