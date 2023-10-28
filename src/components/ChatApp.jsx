@@ -1,34 +1,38 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CommentContext from "../context/CommentContext";
 import CurrentUserContext from "../context/CurrentUserContext";
 import CommentBox from "./CommentBox";
 
 export default function ChatApp() {
-  let isCurrentUser = true;
-  const { switchUser } = useContext(CurrentUserContext);
+  const { currentUserID, switchUser } = useContext(CurrentUserContext);
+  const [id, setId] = useState(currentUserID);
+
+  const handleUserSwitch = (userID) => {
+    setId(userID);
+    switchUser(userID);
+  };
 
   return (
     <>
-      <main className="grid  min-h-screen place-content-center bg-very-light-gray font-rubik">
+      <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
+        {/* <CommentContext.Provider value={"update"}>
+          <CommentBox />
+        </CommentContext.Provider> */}
+
         <CommentContext.Provider value={"update"}>
           <CommentBox />
         </CommentContext.Provider>
-        {/* <CommentContext.Provider value={"send"}>
-          <CommentBox />
-        </CommentContext.Provider> */}
       </main>
       <aside className="fixed top-0 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10">
-        <h2 className="sr-only">SideBar</h2>
+        <h2 className="sr-only">Sidebar</h2>
 
         <div className="avatar-group flex flex-col items-center justify-center -space-y-6 overflow-visible hover:space-y-1">
           <button
             id={1}
-            onClick={(e) => {
-              switchUser(Number(e.currentTarget.id));
-            }}
-            className={` avatar w-10 overflow-visible border-2 duration-1000 ${
-              false && "before:absolute"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-black before:transition-all before:hover:h-3/4 md:w-14 `}
+            onClick={() => handleUserSwitch(1)}
+            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+              id === 1 ? "before:absolute" : "before:hidden"
+            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
             aria-label="Amy Robson"
           >
             <img
@@ -39,28 +43,10 @@ export default function ChatApp() {
 
           <button
             id={2}
-            onClick={(e) => {
-              switchUser(Number(e.currentTarget.id));
-            }}
-            className={` avatar w-10 overflow-visible border-2 duration-1000 ${
-              isCurrentUser && "before:absolute"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-black before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label="Julius Omo"
-          >
-            <img
-              src="/src/assets/images/avatars/image-juliusomo.webp"
-              alt="Julius Omo"
-            />
-          </button>
-
-          <button
-            id={3}
-            onClick={(e) => {
-              switchUser(Number(e.currentTarget.id));
-            }}
-            className={` avatar w-10 overflow-visible border-2 duration-1000 ${
-              false && "before:absolute"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-black before:transition-all before:hover:h-3/4 md:w-14 `}
+            onClick={() => handleUserSwitch(2)}
+            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+              id === 2 ? "before:absolute" : "before:hidden"
+            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
             aria-label="Max Blagun"
           >
             <img
@@ -70,13 +56,11 @@ export default function ChatApp() {
           </button>
 
           <button
-            id={4}
-            onClick={(e) => {
-              switchUser(Number(e.currentTarget.id));
-            }}
-            className={` avatar w-10 overflow-visible border-2 duration-1000 ${
-              false && "before:absolute"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-black before:transition-all before:hover:h-3/4 md:w-14 `}
+            id={3}
+            onClick={() => handleUserSwitch(3)}
+            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+              id === 3 ? "before:absolute" : "before:hidden"
+            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
             aria-label="Ramses Miron"
           >
             <img
@@ -84,15 +68,29 @@ export default function ChatApp() {
               alt="Ramses Miron"
             />
           </button>
+
+          <button
+            id={4}
+            onClick={() => handleUserSwitch(4)}
+            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+              id === 4 ? "before:absolute" : "before:hidden"
+            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
+            aria-label="Julius Omo"
+          >
+            <img
+              src="/src/assets/images/avatars/image-juliusomo.webp"
+              alt="Julius Omo"
+            />
+          </button>
         </div>
         <div className="theme  grid place-content-center">
-          <label className="swap swap-rotate">
+          <label className="swap swap-rotate fill-white">
             {/* this hidden checkbox controls the state */}
             <input type="checkbox" />
 
             {/* sun icon */}
             <svg
-              className="swap-off h-8 w-8 fill-white"
+              className="fill-Fwhite swap-off h-8 w-8"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >

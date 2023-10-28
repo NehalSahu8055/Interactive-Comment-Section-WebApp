@@ -17,7 +17,7 @@ export default function IconButton({ btnIndex, action }) {
             });
           else {
             action((prev) => {
-              return { ...prev, isReplying: true };
+              return { ...prev, isReplying: true, isReplying: true };
             });
           }
         }}

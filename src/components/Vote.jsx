@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useVoting from "../hooks/useVoting";
 
-export default function Vote({ score }) {
+export default function Vote({ score, isCurrentUser }) {
   const [hasVoted, sethasVoted] = useState({
     upvotes: false,
     downvotes: false,
@@ -49,7 +49,10 @@ export default function Vote({ score }) {
       <button
         data-vote="upvotes"
         onClick={toggleVote}
-        className="grid h-full place-content-center p-3 transition hover:brightness-50 hover:saturate-[5]"
+        className={`grid h-full place-content-center p-3 transition ${
+          !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
+        }`}
+        disabled={isCurrentUser}
       >
         <span className="sr-only">Click to upvote the comment</span>
         <img
@@ -63,9 +66,11 @@ export default function Vote({ score }) {
       <button
         data-vote="downvotes"
         onClick={toggleVote}
-        className="grid h-full place-content-center px-3 py-4  transition hover:brightness-50 hover:saturate-[5]"
+        className={`grid h-full place-content-center p-3 transition ${
+          !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
+        }`}
+        disabled={isCurrentUser}
       >
-        {/* {!hasUpvoted ? downvote : upvote} */}
         <span className="sr-only">Click to downvote the comment</span>
         <img
           src="/src/assets/images/icon-minus.svg"

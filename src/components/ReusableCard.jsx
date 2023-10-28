@@ -5,8 +5,7 @@ import ReplyBox from "./ReplyBox";
 import Vote from "./Vote";
 import Filter from "bad-words";
 import errorCommentData from "../data/errorCommentData";
-import SendCommentContext from "../context/SendCommentContext";
-import UpdateCommentContext from "../context/CommentContext";
+import CommentContext from "../context/CommentContext";
 import emojidata from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { MdAddReaction } from "react-icons/md";
@@ -15,9 +14,8 @@ import useEmojiPicker from "../hooks/useEmojiPicker";
 import CurrentUserContext from "../context/CurrentUserContext";
 
 export default function ReusableCard({ person }) {
-  const { currentUserID, switchUser } = useContext(CurrentUserContext);
-  console.log(currentUserID);
-  // switchUser(currentUserID);
+  const { currentUserID } = useContext(CurrentUserContext);
+  // switchUser(data.currentUser.id);
   const {
     id,
     content,
@@ -27,8 +25,7 @@ export default function ReusableCard({ person }) {
     replies,
   } = person;
 
-  const commentType =
-    useContext(SendCommentContext) || useContext(UpdateCommentContext);
+  const commentType = useContext(CommentContext);
 
   const filter = new Filter();
   const [charCount, setcharCount] = useState(content.length);
@@ -136,7 +133,9 @@ export default function ReusableCard({ person }) {
           <form className="relative" onSubmit={updateComment}>
             <textarea
               name="comment"
-              className="comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-sm border border-red-500  p-2 text-grayish-blue caret-moderate-blue outline-none focus:border-moderate-blue"
+              className={`comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border ${
+                commentError ? "border-red-500" : "focus:border-moderate-blue"
+              }  p-2 text-grayish-blue caret-moderate-blue outline-none `}
               value={comment}
               onChange={editComment}
               placeholder="Add a comment..."
@@ -191,13 +190,13 @@ export default function ReusableCard({ person }) {
                   }}
                   className={`emojiBtn ${
                     commentType === "send" && "hidden"
-                  } btn glass btn-sm`}
+                  } btn glass btn-sm group`}
                   aria-labelledby="emojiBtnID"
                 >
                   <span className="sr-only" id="emojiBtnID">
                     Click this button for emoji tray
                   </span>
-                  <MdAddReaction className="fill-dark-blue text-xl" />
+                  <MdAddReaction className="fill-dark-blue text-xl group-hover:fill-moderate-blue transition" />
                 </button>
 
                 <button
@@ -215,16 +214,16 @@ export default function ReusableCard({ person }) {
           </form>
         ) : (
           <>
-            <p className="comment-actual text-grayish-blue">
+            <p className="comment-actual whitespace-normal break-words text-grayish-blue">
               {
                 // Handle censored text filtering if any
-                filter.clean(comment)
+                commentType === "update" && filter.clean(comment)
               }
             </p>
 
             <div className="btnss flex items-center justify-between">
               {/* Handle voting functions*/}
-              <Vote score={score} />
+              <Vote score={score} isCurrentUser={isCurrentUser} />
 
               {/* Handle icon buttons according to card type */}
               {isCurrentUser ? (
@@ -241,6 +240,7 @@ export default function ReusableCard({ person }) {
           </>
         )}
       </div>
+      {isReplying && <ReusableCard person={person} />}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SendCommentContext from "../context/SendCommentContext";
+import CommentContext from "../context/CommentContext";
 import CommentBox from "./CommentBox";
 import CommentCard from "./CommentCard";
 import ReusableCard from "./ReusableCard";
@@ -8,7 +8,6 @@ export default function ReplyBox({ replyCard }) {
 
   const toggleComment = (e) => {
     e.currentTarget.setAttribute("aria-expanded", !isExpanded);
-
     e.currentTarget.dataset.tip = !isExpanded
       ? "Collapse Comment"
       : "Expand Comment";
@@ -52,12 +51,12 @@ export default function ReplyBox({ replyCard }) {
         className="reply-comment hidden space-y-4 pl-4 pt-4 peer-aria-expanded:block "
         id="commentID"
       >
-        <SendCommentContext.Provider value={"update"}>
+        <CommentContext.Provider value={"update"}>
           {/* <CommentCard id={2} /> */}
           {replyCard}
 
           {/* {console.log(replyCard)} */}
-        </SendCommentContext.Provider>
+        </CommentContext.Provider>
       </div>
     </div>
   );

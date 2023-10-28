@@ -1,9 +1,4 @@
 {
-  "currentUser": {
-    "id": 1,
-    "image": "/src/assets/images/avatars/image-juliusomo.webp",
-    "username": "juliusomo"
-  },
   "comments": [
     {
       "id": 1,
