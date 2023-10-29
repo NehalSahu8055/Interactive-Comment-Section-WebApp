@@ -10,13 +10,13 @@ export default function CommentCard({ cardID }) {
   return (
     <>
       {/* Handles comments  */}
-      <ReusableCard person={comment} />
+      <ReusableCard person={comment} type={"update"} />
 
       {/* Handles replies under comment  */}
       {comment.replies.length > 0 && (
         <ReplyBox
           replyCard={comment.replies.map((reply) => (
-            <ReusableCard person={reply} key={reply.id} />
+            <ReusableCard person={reply} type={"update"} key={reply.id} />
           ))}
         />
       )}

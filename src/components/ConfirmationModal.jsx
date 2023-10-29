@@ -11,19 +11,26 @@ export default function ConfirmationModal({ setisModified }) {
       <form
         method="dialog"
         className="modal-box max-w-[23rem] rounded-[0.32rem]"
+        tabIndex={-1}
       >
-        <h3 className="text-xl font-medium text-dark-blue">Delete comment</h3>
-        <p className="py-4 leading-6 text-grayish-blue">
+        <h3 className="text-xl font-medium text-dark-blue" tabIndex={-1}>
+          Delete comment
+        </h3>
+        <p className="py-4 leading-6 text-grayish-blue" tabIndex={-1}>
           Are you sure you want to delete this comment? This will remove the
           comment and can’t be undone.
         </p>
         <div className="buttons flex justify-between">
-          <button className="btn btn-neutral font-medium leading-6 text-white">
+          <button
+            className="btn btn-neutral font-medium leading-6 text-white"
+            tabIndex={-1}
+          >
             NO, CANCEL
           </button>
           <button
             onClick={deleteComment}
             className="btn btn-error font-medium leading-6 text-white"
+            tabIndex={-1}
           >
             YES, DELETE
           </button>

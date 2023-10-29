@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import CommentContext from "../context/CommentContext";
 import CurrentUserContext from "../context/CurrentUserContext";
 import CommentBox from "./CommentBox";
 
@@ -15,8 +14,7 @@ export default function ChatApp() {
   return (
     <>
       <aside className="fixed top-0 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10">
-        <h2 className="sr-only">Sidebar</h2>
-
+        <h2 className="sr-only">Main Sidebar</h2>
         <div className="avatar-group flex flex-col items-center justify-center -space-y-6 overflow-visible hover:space-y-1">
           <button
             id={1}
@@ -24,11 +22,13 @@ export default function ChatApp() {
             className={`avatar w-10 overflow-visible border-2 duration-1000 ${
               id === 1 ? "before:absolute" : "before:hidden"
             } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label="Amy Robson"
+            aria-label={`${
+              currentUserID === 1 ? "Current" : ""
+            } User Amy Robson`}
           >
             <img
               src="/src/assets/images/avatars/image-amyrobson.webp"
-              alt="Amy Robson"
+              // alt="Amy Robson"
             />
           </button>
 
@@ -38,11 +38,13 @@ export default function ChatApp() {
             className={`avatar w-10 overflow-visible border-2 duration-1000 ${
               id === 2 ? "before:absolute" : "before:hidden"
             } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label="Max Blagun"
+            aria-label={`${
+              currentUserID === 2 ? "Current" : ""
+            } User Max Blagun`}
           >
             <img
               src="/src/assets/images/avatars/image-maxblagun.png"
-              alt="Max Blagun"
+              // alt="Max Blagun"
             />
           </button>
 
@@ -52,11 +54,11 @@ export default function ChatApp() {
             className={`avatar w-10 overflow-visible border-2 duration-1000 ${
               id === 3 ? "before:absolute" : "before:hidden"
             } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label="Ramses Miron"
+            aria-label={`${currentUserID === 3 ? "Current" : ""} User Miron`}
           >
             <img
               src="/src/assets/images/avatars/image-ramsesmiron.png"
-              alt="Ramses Miron"
+              // alt="Ramses Miron"
             />
           </button>
 
@@ -66,11 +68,13 @@ export default function ChatApp() {
             className={`avatar w-10 overflow-visible border-2 duration-1000 ${
               id === 4 ? "before:absolute" : "before:hidden"
             } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label="Julius Omo"
+            aria-label={`${
+              currentUserID === 4 ? "Current" : ""
+            } User Julius Omo`}
           >
             <img
               src="/src/assets/images/avatars/image-juliusomo.webp"
-              alt="Julius Omo"
+              // alt="Julius Omo"
             />
           </button>
         </div>
@@ -100,9 +104,7 @@ export default function ChatApp() {
         </div>
       </aside>
       <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
-        <CommentContext.Provider value={"update"}>
-          <CommentBox />
-        </CommentContext.Provider>
+        <CommentBox />
       </main>
     </>
   );

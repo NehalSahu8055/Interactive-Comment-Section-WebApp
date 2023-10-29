@@ -3,28 +3,27 @@ import useVoting from "../hooks/useVoting";
 
 export default function Vote({ score, isCurrentUser }) {
   const [hasVoted, sethasVoted] = useState({
-    upvotes: false,
-    downvotes: false,
+    hasUpvoted: false,
+    hasDownvoted: false,
   });
   const { state, upvote, downvote } = useVoting(score);
+  const { hasUpvoted, hasDownvoted } = hasVoted;
 
   const toggleVote = (e) => {
     const voteType = e.currentTarget.dataset.vote;
 
     // Check if the button is already in the voting state
     if (
-      (voteType === "upvotes" && hasVoted.upvotes) ||
-      (voteType === "downvotes" && hasVoted.downvotes)
+      (voteType === "upvotes" && hasUpvoted) ||
+      (voteType === "downvotes" && hasDownvoted)
     ) {
-      // You can choose to show a message or disable the button here to prevent multiple clicks
-      // e.currentTarget.setAttribute(disabled,"disabled");
       return;
     }
 
     sethasVoted((prevVote) => ({
       ...prevVote,
-      upvotes: voteType === "upvotes",
-      downvotes: voteType === "downvotes",
+      hasUpvoted: voteType === "upvotes",
+      hasDownvoted: voteType === "downvotes",
     }));
 
     if (voteType === "upvotes") {
@@ -36,7 +35,6 @@ export default function Vote({ score, isCurrentUser }) {
       );
     } else if (voteType === "downvotes") {
       downvote();
-      // e.currentTarget.classList.add("brightness-50", "saturate-[5]");
       e.currentTarget.parentNode.firstElementChild.classList.remove(
         "brightness-50",
         "saturate-[5]",
@@ -53,8 +51,11 @@ export default function Vote({ score, isCurrentUser }) {
           !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
         }`}
         disabled={isCurrentUser}
+        aria-labelledby="upvoteID"
       >
-        <span className="sr-only">Click to upvote the comment</span>
+        <span id="upvoteID" className="sr-only">
+          {hasUpvoted ? "You have upvoted" : "Click to upvote the comment"}
+        </span>
         <img
           className=""
           src="/src/assets/images/icon-plus.svg"
@@ -62,16 +63,27 @@ export default function Vote({ score, isCurrentUser }) {
           alt=""
         />
       </button>
-      <span className="grid h-full place-content-center px-1">{state}</span>
+      <span
+        className="grid h-full place-content-center px-1"
+        aria-labelledby="totalUpvotesID"
+      >
+        {state}
+      </span>
+      <span className="sr-only" id="totalUpvotesID">
+        Live total upvotes is {state}{" "}
+      </span>
       <button
         data-vote="downvotes"
         onClick={toggleVote}
-        className={`grid h-full place-content-center p-3 transition ${
+        className={`grid h-[2rem] place-content-center p-3 transition ${
           !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
         }`}
         disabled={isCurrentUser}
+        aria-labelledby="downvoteID"
       >
-        <span className="sr-only">Click to downvote the comment</span>
+        <span id="downvoteID" className="sr-only">
+          "Click to downvote the comment"
+        </span>
         <img
           src="/src/assets/images/icon-minus.svg"
           aria-hidden="true"

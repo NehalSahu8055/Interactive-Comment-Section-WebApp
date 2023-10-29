@@ -5,7 +5,6 @@ import ReplyBox from "./ReplyBox";
 import Vote from "./Vote";
 import Filter from "bad-words";
 import errorCommentData from "../data/errorCommentData";
-import CommentContext from "../context/CommentContext";
 import emojidata from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { MdAddReaction } from "react-icons/md";
@@ -13,7 +12,7 @@ import data from "../data/data.json";
 import useEmojiPicker from "../hooks/useEmojiPicker";
 import CurrentUserContext from "../context/CurrentUserContext";
 
-export default function ReusableCard({ person }) {
+export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
   // switchUser(data.currentUser.id);
   const {
@@ -25,7 +24,7 @@ export default function ReusableCard({ person }) {
     replies,
   } = person;
 
-  const commentType = useContext(CommentContext);
+  const commentType = type;
 
   const filter = new Filter();
   const [charCount, setcharCount] = useState(content.length);
@@ -96,7 +95,6 @@ export default function ReusableCard({ person }) {
   const replyCard2 = data.comments[1].replies.find(
     (person) => person.id === currentUserID,
   );
-  console.log(replyCard2);
 
   return (
     <>
@@ -106,37 +104,40 @@ export default function ReusableCard({ person }) {
           id={id}
           className={`user-comment space-y-4  rounded-lg bg-white p-4 `}
         >
-          <div
-            className={`${
-              commentType === "send" && "hidden"
-            } flex items-center `}
-          >
-            <a
-              href="#"
-              className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
-            >
-              <figure className="flex items-center gap-4 pr-1  font-medium">
-                <img
-                  className="w-8 rounded-full"
-                  src={image}
-                  alt="avatar of a smiling girl with curly hair wearing sunglasses"
-                />
-                <figcaption className="text-dark-blue">{username}</figcaption>
-              </figure>
-            </a>
-            {isCurrentUser && (
-              <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
-                you
-              </div>
-            )}
-            <span className="pl-4 text-grayish-blue">{createdAt}</span>
-          </div>
+          {commentType === "update" && (
+            <div className="flex items-center">
+              <a
+                href="#"
+                className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
+                aria-labelledby="update-userID"
+              >
+                <span className="sr-only" id="update-userID">
+                  Click this to view profile
+                </span>
+                <figure className="flex items-center gap-4 pr-1  font-medium">
+                  <img
+                    className="w-8 rounded-full"
+                    src={image}
+                    alt={`User Avatar ${username}`}
+                  />
+                  <figcaption className="text-dark-blue">{username}</figcaption>
+                </figure>
+              </a>
+              {isCurrentUser && (
+                <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
+                  you
+                </div>
+              )}
+              <span className="pl-4 text-grayish-blue">{createdAt}</span>
+            </div>
+          )}
 
           {/* Handle textarea editing */}
           {isCurrentUser &&
           (commentType === "update" ? isEditing : !isEditing) ? (
             <form className="relative" onSubmit={updateComment}>
               <textarea
+                id="commentTextAreaID"
                 name="comment"
                 className={`comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border ${
                   commentError ? "border-red-500" : "focus:border-moderate-blue"
@@ -171,22 +172,22 @@ export default function ReusableCard({ person }) {
               <div className="flex items-center justify-between pt-3">
                 {/* <div className="flex w-full justify-between pt-3"> */}
 
-                <a href="#" className="cursor-pointer">
-                  <figure
-                    className={`${
-                      commentType === "update" && "hidden"
-                    } flex items-center gap-4 rounded-full p-1 pr-2 font-medium hover:bg-light-gray`}
+                {commentType == "send" && (
+                  <a
+                    href="#"
+                    className="cursor-pointer"
+                    aria-labelledby="send-userID"
                   >
+                    <span className="sr-only" id="send-userID">
+                      Click this to view profile
+                    </span>
                     <img
                       className="w-8 rounded-full"
-                      src="/src/assets/images/avatars/image-amyrobson.webp"
-                      alt="avatar of a smiling curly hair girl with sunglasses"
+                      src={image}
+                      alt="User avatar of a smiling girl with curly hair wearing sunglasses"
                     />
-                    <figcaption className="sr-only text-dark-blue">
-                      amyrobson
-                    </figcaption>
-                  </figure>
-                </a>
+                  </a>
+                )}
                 <div className="cta-btns flex w-full justify-between">
                   <button
                     type="button"
@@ -236,7 +237,7 @@ export default function ReusableCard({ person }) {
                     <IconButton btnIndex="0" action={setisModified} />
 
                     <IconButton btnIndex="1" action={setisModified} />
-                    {/* <ConfirmationModal setisModified={setisModified} /> */}
+                    <ConfirmationModal setisModified={setisModified} />
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />
@@ -249,9 +250,13 @@ export default function ReusableCard({ person }) {
       {/* Handle adding reply card by current user in the reply box */}
       {isReplying &&
         (replyCard ? (
-          <ReplyBox replyCard={<ReusableCard person={replyCard} />} />
+          <ReplyBox
+            replyCard={<ReusableCard person={replyCard} type={"update"} />}
+          />
         ) : (
-          <ReplyBox replyCard={<ReusableCard person={replyCard2} />} />
+          <ReplyBox
+            replyCard={<ReusableCard person={replyCard2} type={"update"} />}
+          />
         ))}
     </>
   );

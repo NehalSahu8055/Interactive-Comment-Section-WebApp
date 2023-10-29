@@ -6,11 +6,15 @@ export default function IconButton({ btnIndex, action }) {
   const handleClick = (e) => {
     if (btn.id == 1) {
       document.getElementById("confirmation-modal").showModal();
-    } else if (btn.id == 2)
+    } else if (btn.id == 2) {
       action((prev) => {
         return { ...prev, isEditing: true };
       });
-    else {
+
+      console.log(document.getElementById("commentTextAreaID"));
+
+      
+    } else {
       action((prev) => {
         return { ...prev, isReplying: true };
       });
