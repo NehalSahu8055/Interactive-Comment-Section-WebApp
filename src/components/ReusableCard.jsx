@@ -102,13 +102,13 @@ export default function ReusableCard({ person, type }) {
         <div
           key={id}
           id={id}
-          className={`user-comment space-y-4  rounded-lg bg-white p-4 `}
+          className={`user-comment bg-whitee  dark:bg-d-whitee space-y-4  rounded-lg p-4 `}
         >
           {commentType === "update" && (
             <div className="flex items-center">
               <a
                 href="#"
-                className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
+                className="dark:hover:bg-d-light-gray cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
                 aria-labelledby="update-userID"
               >
                 <span className="sr-only" id="update-userID">
@@ -120,15 +120,19 @@ export default function ReusableCard({ person, type }) {
                     src={image}
                     alt={`User Avatar ${username}`}
                   />
-                  <figcaption className="text-dark-blue">{username}</figcaption>
+                  <figcaption className="dark:text-d-dark-blue text-dark-blue">
+                    {username}
+                  </figcaption>
                 </figure>
               </a>
               {isCurrentUser && (
-                <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-white">
+                <div className="dark:bg-d-moderate-blue h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-whitee">
                   you
                 </div>
               )}
-              <span className="pl-4 text-grayish-blue">{createdAt}</span>
+              <span className="pl-4 text-grayish-blue dark:text-white">
+                {createdAt}
+              </span>
             </div>
           )}
 
@@ -139,9 +143,11 @@ export default function ReusableCard({ person, type }) {
               <textarea
                 id="commentTextAreaID"
                 name="comment"
-                className={`comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border ${
-                  commentError ? "border-red-500" : "focus:border-moderate-blue"
-                }  p-2 text-grayish-blue caret-moderate-blue outline-none `}
+                className={`comment-editing dark:bg-[#383a40] flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border ${
+                  commentError
+                    ? "border-red-500"
+                    : "dark:focus:border-d-moderate-blue focus:border-moderate-blue"
+                }  dark:caret-d-moderate-blue dark:text-white p-2 text-grayish-blue caret-moderate-blue outline-none `}
                 value={comment}
                 onChange={editComment}
                 placeholder="Add a comment..."
@@ -149,7 +155,7 @@ export default function ReusableCard({ person, type }) {
 
               {/* Handle emoji picker */}
               {showEmoji && (
-                <div className="absolute right-2 top-full z-10 bg-very-light-gray shadow-xl">
+                <div className="dark:bg-d-very-light-gray absolute right-2 top-full z-10 bg-very-light-gray  shadow-xl">
                   <Picker
                     data={emojidata}
                     onEmojiSelect={addEmoji}
@@ -202,14 +208,14 @@ export default function ReusableCard({ person, type }) {
                     <span className="sr-only" id="emojiBtnID">
                       Click this button for emoji tray
                     </span>
-                    <MdAddReaction className="fill-dark-blue text-xl transition group-hover:fill-moderate-blue" />
+                    <MdAddReaction className="dark:group-hover:fill-d-moderate-blue dark:fill-d-dark-blue fill-dark-blue  text-xl transition group-hover:fill-moderate-blue" />
                   </button>
 
                   <button
                     type="submit"
                     className={`${
                       commentType === "send" && "h-fit px-7 py-3"
-                    } btn btn-sm w-fit bg-moderate-blue font-medium text-white transition-all hover:bg-moderate-blue hover:opacity-80`}
+                    } dark:bg-d-moderate-blue btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80`}
                     disabled={commentError}
                   >
                     {commentType === "update" ? "Update" : "Send"}
@@ -220,7 +226,7 @@ export default function ReusableCard({ person, type }) {
             </form>
           ) : (
             <>
-              <p className="comment-actual whitespace-normal break-words text-grayish-blue">
+              <p className="comment-actual whitespace-normal break-words text-grayish-blue dark:text-d-light-grayish-blue">
                 {
                   // Handle censored text filtering if any
                   commentType === "update" && filter.clean(comment)

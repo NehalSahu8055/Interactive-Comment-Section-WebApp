@@ -43,7 +43,7 @@ export default function Vote({ score, isCurrentUser }) {
   };
 
   return (
-    <div className="vote-counter flex w-fit items-center rounded-lg bg-very-light-gray font-medium text-moderate-blue">
+    <div className="vote-counter dark:bg-d-very-light-gray dark:text-d-moderate-blue flex w-fit items-center rounded-lg bg-very-light-gray font-medium text-moderate-blue">
       <button
         data-vote="upvotes"
         onClick={toggleVote}

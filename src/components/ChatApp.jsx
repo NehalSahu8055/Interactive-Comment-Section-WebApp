@@ -13,18 +13,16 @@ export default function ChatApp() {
 
   return (
     <>
-      <aside className="fixed top-0 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10">
+      <aside className="dark:bg-d-whitee fixed top-0 z-30 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10 shadow-xl">
         <h2 className="sr-only">Main Sidebar</h2>
         <div className="avatar-group flex flex-col items-center justify-center -space-y-6 overflow-visible hover:space-y-1">
           <button
             id={1}
             onClick={() => handleUserSwitch(1)}
-            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+            className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
               id === 1 ? "before:absolute" : "before:hidden"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label={`${
-              currentUserID === 1 ? "Current" : ""
-            } User Amy Robson`}
+            } dark:before:bg-d-moderate-blue ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
+            aria-label={`${currentUserID === 1 ? "Current" : ""} User Miron`}
           >
             <img
               src="/src/assets/images/avatars/image-amyrobson.webp"
@@ -35,12 +33,10 @@ export default function ChatApp() {
           <button
             id={2}
             onClick={() => handleUserSwitch(2)}
-            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+            className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
               id === 2 ? "before:absolute" : "before:hidden"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label={`${
-              currentUserID === 2 ? "Current" : ""
-            } User Max Blagun`}
+            } dark:before:bg-d-moderate-blue ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
+            aria-label={`${currentUserID === 2 ? "Current" : ""} User Miron`}
           >
             <img
               src="/src/assets/images/avatars/image-maxblagun.png"
@@ -51,9 +47,9 @@ export default function ChatApp() {
           <button
             id={3}
             onClick={() => handleUserSwitch(3)}
-            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+            className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
               id === 3 ? "before:absolute" : "before:hidden"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
+            } dark:before:bg-d-moderate-blue ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
             aria-label={`${currentUserID === 3 ? "Current" : ""} User Miron`}
           >
             <img
@@ -65,12 +61,10 @@ export default function ChatApp() {
           <button
             id={4}
             onClick={() => handleUserSwitch(4)}
-            className={`avatar w-10 overflow-visible border-2 duration-1000 ${
+            className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
               id === 4 ? "before:absolute" : "before:hidden"
-            } before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
-            aria-label={`${
-              currentUserID === 4 ? "Current" : ""
-            } User Julius Omo`}
+            } dark:before:bg-d-moderate-blue ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 md:w-14 `}
+            aria-label={`${currentUserID === 4 ? "Current" : ""} User Miron`}
           >
             <img
               src="/src/assets/images/avatars/image-juliusomo.webp"
@@ -103,7 +97,7 @@ export default function ChatApp() {
           </label>
         </div>
       </aside>
-      <main className="grid min-h-screen place-content-center bg-very-light-gray font-rubik">
+      <main className="dark:bg-d-very-light-gray grid min-h-screen place-content-center bg-very-light-gray font-rubik">
         <CommentBox />
       </main>
     </>

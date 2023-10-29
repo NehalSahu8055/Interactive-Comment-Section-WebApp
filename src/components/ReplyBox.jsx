@@ -25,14 +25,14 @@ export default function ReplyBox({ replyCard }) {
 
   return (
     <div
-      className="reply-box relative flex flex-col  rounded-bl-xl border-l-2  border-light-gray"
+      className="reply-box dark:border-d-light-gray relative flex  flex-col rounded-bl-xl  border-l-2 border-light-gray dark:border-d-light-gray"
       id="replyBoxID"
     >
       <button
         id="toggleCommentID"
         onClick={toggleComment}
         data-tip="Collapse Comment"
-        className="peer tooltip absolute -left-2.5 -top-2  grid h-5 w-5 cursor-pointer place-content-center rounded-full border border-light-grayish-blue bg-light-gray transition-all hover:brightness-[95%]"
+        className="dark:border-d-light-grayish-blue peer tooltip absolute -left-2.5  -top-2 grid h-5 w-5 cursor-pointer place-content-center rounded-full border border-light-gray dark:border-d-light-gray bg-light-gray dark:bg-d-light-gray shadow-lg transition-all hover:brightness-[95%]"
         aria-expanded="true"
         aria-controls="commentID"
         aria-haspopup="true"

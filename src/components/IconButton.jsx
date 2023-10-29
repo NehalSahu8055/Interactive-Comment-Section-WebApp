@@ -12,8 +12,6 @@ export default function IconButton({ btnIndex, action }) {
       });
 
       console.log(document.getElementById("commentTextAreaID"));
-
-      
     } else {
       action((prev) => {
         return { ...prev, isReplying: true };
@@ -26,7 +24,9 @@ export default function IconButton({ btnIndex, action }) {
       <button
         onClick={handleClick}
         key={btn.id}
-        className={`group btn btn-sm   flex items-center capitalize  ${
+        className={`group btn btn-sm ${
+          btn.id != 1 ? "dark:bg-d-very-light-gray dark:border-none" : ""
+        }  flex items-center capitalize  ${
           btn.id == 1 && "btn-error btn-outline mr-2"
         } `}
       >
