@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentContext from "../context/CommentContext";
 
-export default function ReplyBox({ replyCard }) {
+export default function ReplyBox({ replyCard, setisModified }) {
   const [isExpanded, setisExpanded] = useState(true);
+
+  
 
   const toggleComment = (e) => {
     e.currentTarget.setAttribute("aria-expanded", !isExpanded);
@@ -19,20 +21,16 @@ export default function ReplyBox({ replyCard }) {
     setisExpanded((prev) => !prev);
   };
 
-  const replyCards = [];
-
-  replyCards.push(replyCard);
-
   return (
     <div
-      className="reply-box dark:border-d-light-gray relative flex  flex-col rounded-bl-xl  border-l-2 border-light-gray dark:border-d-light-gray"
+      className="reply-box relative flex flex-col  rounded-bl-xl border-l-2  border-light-gray dark:border-d-light-gray"
       id="replyBoxID"
     >
       <button
         id="toggleCommentID"
         onClick={toggleComment}
         data-tip="Collapse Comment"
-        className="dark:border-d-light-grayish-blue peer tooltip absolute -left-2.5  -top-2 grid h-5 w-5 cursor-pointer place-content-center rounded-full border border-light-gray dark:border-d-light-gray bg-light-gray dark:bg-d-light-gray shadow-lg transition-all hover:brightness-[95%]"
+        className="peer tooltip absolute -left-2.5 -top-2  grid h-5 w-5 cursor-pointer place-content-center rounded-full border border-light-gray bg-light-gray shadow-lg transition-all hover:brightness-[95%] dark:border-d-light-gray dark:border-d-light-grayish-blue dark:bg-d-light-gray"
         aria-expanded="true"
         aria-controls="commentID"
         aria-haspopup="true"
@@ -55,7 +53,7 @@ export default function ReplyBox({ replyCard }) {
         id="commentID"
       >
         <CommentContext.Provider value={"update"}>
-          {replyCards}
+          {replyCard}
         </CommentContext.Provider>
       </div>
     </div>

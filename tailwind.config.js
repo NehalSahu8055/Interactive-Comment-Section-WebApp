@@ -8,33 +8,35 @@ export default {
       },
       colors: {
         // light mode
-        "moderate-blue": "hsl(238, 40%, 52%)",
+        "moderate-blue": "#5457b6",
         "soft-red": "#bf5053",
-        "light-grayish-blue": "hsl(239, 57%, 85%)",
-        "pale-red": "hsl(357, 100%, 86%)",
-        "dark-blue": "hsl(212, 24%, 26%)",
-        "grayish-blue": "hsl(211, 10%, 45%)",
-        "light-gray": "hsl(223, 19%, 93%)",
-        "very-light-gray": "hsl(228, 33%, 97%)",
-        "whitee": "hsl(0, 0%, 100%)",
+        "light-grayish-blue": "#c5d9ec",
+        "pale-red": "#ff7171",
+        "dark-blue": "#1b3247",
+        "grayish-blue": "#6d8b99",
+        "light-gray": "#e3eaed",
+        "very-light-gray": "#f4f8fb",
+        "whitee": "#ffffff",
 
         // dark mode
-        "d-moderate-blue": " #7289da",
+        "d-moderate-blue": "#7289da",
         "d-soft-red": "#bf5053",
         "d-light-grayish-blue": "#e4e6ec",
-        "d-pale-red": "hsl(357, 100 %, 86 %)",
+        "d-pale-red": "#ff7171",
         "d-dark-blue": "#ffffff",
-        "d-grayish-blue": "hsl(225, 17 %, 91 %)",
+        "d-grayish-blue": "#e6f0f4",
         "d-light-gray": "#2c2f33",
-        "d-very-light-gray": "#23272a",
+        "d-very-light-gray": "hsl(0, 0%, 13%)",
         "d-whitee": "#2c2f33"
 
       }
+
+
     },
   },
 
   daisyui: {
-    themes: ["light","dark"],
+    themes: ["light", "dark"],
   },
   plugins: [
     require("daisyui"),

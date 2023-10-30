@@ -10,11 +10,9 @@ export default function IconButton({ btnIndex, action }) {
       action((prev) => {
         return { ...prev, isEditing: true };
       });
-
-      console.log(document.getElementById("commentTextAreaID"));
     } else {
       action((prev) => {
-        return { ...prev, isReplying: true };
+        return { ...prev, isReplying: !prev.isReplying };
       });
     }
   };
@@ -25,7 +23,9 @@ export default function IconButton({ btnIndex, action }) {
         onClick={handleClick}
         key={btn.id}
         className={`group btn btn-sm ${
-          btn.id != 1 ? "dark:bg-d-very-light-gray dark:border-none" : ""
+          btn.id != 1
+            ? "dark:border-none dark:bg-d-very-light-gray dark:text-d-moderate-blue"
+            : ""
         }  flex items-center capitalize  ${
           btn.id == 1 && "btn-error btn-outline mr-2"
         } `}

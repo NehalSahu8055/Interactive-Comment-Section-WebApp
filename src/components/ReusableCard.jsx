@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 import IconButton from "./IconButton";
 import ReplyBox from "./ReplyBox";
@@ -11,10 +11,9 @@ import { MdAddReaction } from "react-icons/md";
 import data from "../data/data.json";
 import useEmojiPicker from "../hooks/useEmojiPicker";
 import CurrentUserContext from "../context/CurrentUserContext";
-
+import useMutableStack from "../hooks/useMutableStack";
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
-  // switchUser(data.currentUser.id);
   const {
     id,
     content,
@@ -33,6 +32,7 @@ export default function ReusableCard({ person, type }) {
     isDeleting: false,
     isEditing: false,
     isReplying: false,
+    isSending: false,
   });
 
   const { isDeleting, isEditing, isReplying } = isModified;
@@ -82,8 +82,7 @@ export default function ReusableCard({ person, type }) {
 
   const isCurrentUser = id === currentUserID;
 
-  //  Handle Emoji Picker Functions [Custom Hook used]
-
+  //  Handles Emoji Picker Functions
   const { showEmoji, setShowEmoji, addEmoji } = useEmojiPicker(
     comment,
     formData,
@@ -96,19 +95,38 @@ export default function ReusableCard({ person, type }) {
     (person) => person.id === currentUserID,
   );
 
+  const { push, top, stack } = useMutableStack([]);
+
+  useEffect(() => {
+    if (isReplying) {
+      if (replyCard && stack.indexOf(replyCard) === -1) {
+        push(replyCard);
+      } else if (replyCard2 && stack.indexOf(replyCard2) === -1) {
+        push(replyCard2);
+      }
+    }
+  }, [isReplying]);
+
+  const replyCards = stack
+    .map((reply) => (
+      <ReusableCard person={reply} type={"send"} key={reply.id} />
+    ))
+    .reverse();
+
+  // <ReusableCard person={top} type={"update"} />
   return (
     <>
       {!isDeleting && (
         <div
           key={id}
           id={id}
-          className={`user-comment bg-whitee  dark:bg-d-whitee space-y-4  rounded-lg p-4 `}
+          className={`user-comment space-y-4  rounded-lg bg-whitee  p-4 dark:bg-d-whitee `}
         >
           {commentType === "update" && (
             <div className="flex items-center">
               <a
                 href="#"
-                className="dark:hover:bg-d-light-gray cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray"
+                className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray dark:hover:bg-d-light-gray"
                 aria-labelledby="update-userID"
               >
                 <span className="sr-only" id="update-userID">
@@ -120,13 +138,13 @@ export default function ReusableCard({ person, type }) {
                     src={image}
                     alt={`User Avatar ${username}`}
                   />
-                  <figcaption className="dark:text-d-dark-blue text-dark-blue">
+                  <figcaption className="text-dark-blue dark:text-d-dark-blue">
                     {username}
                   </figcaption>
                 </figure>
               </a>
               {isCurrentUser && (
-                <div className="dark:bg-d-moderate-blue h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-whitee">
+                <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-whitee dark:bg-d-moderate-blue">
                   you
                 </div>
               )}
@@ -136,26 +154,27 @@ export default function ReusableCard({ person, type }) {
             </div>
           )}
 
-          {/* Handle textarea editing */}
+          {/* Handles textarea editing */}
           {isCurrentUser &&
           (commentType === "update" ? isEditing : !isEditing) ? (
             <form className="relative" onSubmit={updateComment}>
               <textarea
                 id="commentTextAreaID"
                 name="comment"
-                className={`comment-editing dark:bg-[#383a40] flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border ${
+                className={`comment-editing flex h-[10rem] w-full resize-none items-center justify-center overflow-auto rounded-md border dark:bg-[#383a40] ${
                   commentError
                     ? "border-red-500"
-                    : "dark:focus:border-d-moderate-blue focus:border-moderate-blue"
-                }  dark:caret-d-moderate-blue dark:text-white p-2 text-grayish-blue caret-moderate-blue outline-none `}
+                    : "focus:border-moderate-blue dark:focus:border-d-moderate-blue"
+                }  p-2 text-grayish-blue caret-moderate-blue outline-none dark:text-white dark:caret-d-moderate-blue `}
                 value={comment}
                 onChange={editComment}
                 placeholder="Add a comment..."
+                autoFocus
               />
 
-              {/* Handle emoji picker */}
+              {/* Handles emoji picker */}
               {showEmoji && (
-                <div className="dark:bg-d-very-light-gray absolute right-2 top-full z-10 bg-very-light-gray  shadow-xl">
+                <div className="absolute right-2 top-full z-10 bg-very-light-gray shadow-xl  dark:bg-d-very-light-gray">
                   <Picker
                     data={emojidata}
                     onEmojiSelect={addEmoji}
@@ -194,7 +213,11 @@ export default function ReusableCard({ person, type }) {
                     />
                   </a>
                 )}
-                <div className="cta-btns flex w-full justify-between">
+                <div
+                  className={`cta-btns flex ${
+                    commentType === "update" ? "w-full" : ""
+                  } justify-between`}
+                >
                   <button
                     type="button"
                     onClick={() => {
@@ -208,14 +231,14 @@ export default function ReusableCard({ person, type }) {
                     <span className="sr-only" id="emojiBtnID">
                       Click this button for emoji tray
                     </span>
-                    <MdAddReaction className="dark:group-hover:fill-d-moderate-blue dark:fill-d-dark-blue fill-dark-blue  text-xl transition group-hover:fill-moderate-blue" />
+                    <MdAddReaction className="fill-dark-blue text-xl transition  group-hover:fill-moderate-blue dark:fill-d-dark-blue dark:group-hover:fill-d-moderate-blue" />
                   </button>
 
                   <button
                     type="submit"
                     className={`${
                       commentType === "send" && "h-fit px-7 py-3"
-                    } dark:bg-d-moderate-blue btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80`}
+                    } btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80 dark:bg-d-moderate-blue`}
                     disabled={commentError}
                   >
                     {commentType === "update" ? "Update" : "Send"}
@@ -228,16 +251,16 @@ export default function ReusableCard({ person, type }) {
             <>
               <p className="comment-actual whitespace-normal break-words text-grayish-blue dark:text-d-light-grayish-blue">
                 {
-                  // Handle censored text filtering if any
+                  // Handles censored text filtering if any
                   commentType === "update" && filter.clean(comment)
                 }
               </p>
 
               <div className="btnss flex items-center justify-between">
-                {/* Handle voting functions*/}
+                {/* Handles voting functions*/}
                 <Vote score={score} isCurrentUser={isCurrentUser} />
 
-                {/* Handle icon buttons according to card type */}
+                {/* Handles icon buttons according to card type */}
                 {isCurrentUser ? (
                   <div className="flex">
                     <IconButton btnIndex="0" action={setisModified} />
@@ -253,17 +276,11 @@ export default function ReusableCard({ person, type }) {
           )}
         </div>
       )}
-      {/* Handle adding reply card by current user in the reply box */}
-      {isReplying &&
-        (replyCard ? (
-          <ReplyBox
-            replyCard={<ReusableCard person={replyCard} type={"update"} />}
-          />
-        ) : (
-          <ReplyBox
-            replyCard={<ReusableCard person={replyCard2} type={"update"} />}
-          />
-        ))}
+
+      {/* Handles adding reply card by current user in the reply box */}
+      {isReplying && (
+        <ReplyBox setisModified={setisModified} replyCard={replyCards} />
+      )}
     </>
   );
 }
