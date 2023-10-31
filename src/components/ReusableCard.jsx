@@ -23,10 +23,9 @@ export default function ReusableCard({ person, type }) {
     replies,
   } = person;
 
-  const commentType = type;
+  const [commentType, setcommentType] = useState(type);
 
   const filter = new Filter();
-  const [charCount, setcharCount] = useState(content.length);
 
   const [isModified, setisModified] = useState({
     isDeleting: false,
@@ -37,6 +36,8 @@ export default function ReusableCard({ person, type }) {
 
   const { isDeleting, isEditing, isReplying } = isModified;
   const initComment = commentType === "update" ? content : "";
+
+  const [charCount, setcharCount] = useState(initComment.length);
 
   const [formData, setFormData] = useState({
     comment: initComment,
@@ -54,19 +55,23 @@ export default function ReusableCard({ person, type }) {
   const updateComment = (e) => {
     e.preventDefault();
 
-    !commentError &&
-      setisModified((prev) => {
-        return { ...prev, isEditing: false };
-      });
+    setisModified((prev) => {
+      return { ...prev, isEditing: false };
+    });
+
+    commentType === "send" && setcommentType("update");
   };
 
   const editComment = (e) => {
-    const { name, value } = e.target;
+    // {
+    //   console.log("Submit initiated : ", isEditing);
+    // }
+    const { name, value, maxLength } = e.target;
 
     const charCount = value.trim().length;
     setcharCount(charCount);
 
-    const maxCharLmtCheck = charCount < MAX_CHARS_COMMENT;
+    const maxCharLmtCheck = charCount < maxLength;
 
     charCount === 0
       ? setcommentError(emptyCommentError)
@@ -78,6 +83,14 @@ export default function ReusableCard({ person, type }) {
           [name]: value,
         })
       : setcommentError(maxCharLmtError);
+  };
+
+  // Handles on Click Enter Submit
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      charCount > 0 && updateComment(e);
+    }
   };
 
   const isCurrentUser = id === currentUserID;
@@ -95,7 +108,7 @@ export default function ReusableCard({ person, type }) {
     (person) => person.id === currentUserID,
   );
 
-  const { push, top, stack } = useMutableStack([]);
+  const { push, top, stack, isEmpty } = useMutableStack([]);
 
   useEffect(() => {
     if (isReplying) {
@@ -112,6 +125,8 @@ export default function ReusableCard({ person, type }) {
       <ReusableCard person={reply} type={"send"} key={reply.id} />
     ))
     .reverse();
+
+  console.log(isReplying);
 
   // <ReusableCard person={top} type={"update"} />
   return (
@@ -170,7 +185,9 @@ export default function ReusableCard({ person, type }) {
                 }  p-2 text-grayish-blue caret-moderate-blue outline-none dark:text-white dark:caret-d-moderate-blue `}
                 value={comment}
                 onChange={editComment}
+                onKeyDown={handleKeyDown}
                 placeholder="Add a comment..."
+                maxLength={MAX_CHARS_COMMENT}
                 autoFocus
               />
 
@@ -192,13 +209,10 @@ export default function ReusableCard({ person, type }) {
               <small className="absolute -top-4 right-3 text-slate-400 ">
                 <i>{charCount}</i>
               </small>
-              <small className="error-comment visible mt-2 self-start text-red-500">
+              <small className="error-comment visible mt-2 self-start text-soft-red dark:text-d-soft-red">
                 <i>{commentError}</i>
               </small>
-
               <div className="flex items-center justify-between pt-3">
-                {/* <div className="flex w-full justify-between pt-3"> */}
-
                 {commentType == "send" && (
                   <a
                     href="#"
@@ -241,13 +255,12 @@ export default function ReusableCard({ person, type }) {
                     className={`${
                       commentType === "send" && "h-fit px-7 py-3"
                     } btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80 dark:bg-d-moderate-blue`}
-                    disabled={commentError}
+                    disabled={charCount === 0}
                   >
                     {commentType === "update" ? "Update" : "Send"}
                   </button>
                 </div>
               </div>
-              {/* </div> */}
             </form>
           ) : (
             <>
@@ -280,8 +293,12 @@ export default function ReusableCard({ person, type }) {
       )}
 
       {/* Handles adding reply card by current user in the reply box */}
-      {isReplying && (
-        <ReplyBox setisModified={setisModified} replyCard={replyCards} />
+      {!isEmpty && (
+        <ReplyBox
+          isReplying={isReplying}
+          setisModified={setisModified}
+          replyCard={replyCards}
+        />
       )}
     </>
   );

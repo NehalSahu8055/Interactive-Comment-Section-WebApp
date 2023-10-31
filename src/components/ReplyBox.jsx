@@ -4,8 +4,6 @@ import CommentContext from "../context/CommentContext";
 export default function ReplyBox({ replyCard, setisModified }) {
   const [isExpanded, setisExpanded] = useState(true);
 
-  
-
   const toggleComment = (e) => {
     e.currentTarget.setAttribute("aria-expanded", !isExpanded);
     e.currentTarget.dataset.tip = !isExpanded
