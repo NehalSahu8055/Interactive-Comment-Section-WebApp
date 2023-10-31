@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import useVoting from "../../../hooks/useUtilities/useVoting";
 
-export default function Vote({ score, isCurrentUser }) {
+export default function Vote({ commentType, score, isCurrentUser }) {
   const [hasVoted, sethasVoted] = useState({
     hasUpvoted: false,
     hasDownvoted: false,
   });
-  const { state, upvote, downvote } = useVoting(score);
+  const initScore = Number(commentType === "update" ? score : 0);
+
+  const { state, upvote, downvote } = useVoting(initScore);
   const { hasUpvoted, hasDownvoted } = hasVoted;
 
   const toggleVote = (e) => {
