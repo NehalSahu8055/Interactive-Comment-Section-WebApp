@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CommentContext from "../context/CommentContext";
+import CommentContext from "../../../../context/commentContext/CommentContext";
 
 export default function ReplyBox({ replyCard, setisModified }) {
   const [isExpanded, setisExpanded] = useState(true);

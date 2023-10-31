@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useVoting from "../hooks/useVoting";
+import useVoting from "../../../hooks/useUtilities/useVoting";
 
 export default function Vote({ score, isCurrentUser }) {
   const [hasVoted, sethasVoted] = useState({

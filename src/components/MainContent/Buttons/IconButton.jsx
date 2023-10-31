@@ -1,5 +1,5 @@
 import React from "react";
-import iconButtonData from "../data/iconButtonData.json";
+import iconButtonData from "../../../data/iconButtonData.json";
 
 export default function IconButton({ btnIndex, action }) {
   const btn = iconButtonData[btnIndex];

@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import ConfirmationModal from "./ConfirmationModal";
-import IconButton from "./IconButton";
-import ReplyBox from "./ReplyBox";
-import Vote from "./Vote";
+import ConfirmationModal from "../../Modals/ConfirmationModal";
+import IconButton from "../../Buttons/IconButton";
+import ReplyBox from "../Reply/ReplyBox";
+import Vote from "../../Vote/Vote";
 import Filter from "bad-words";
-import errorCommentData from "../data/errorCommentData";
+import errorCommentData from "../../../../data/errorCommentData";
 import emojidata from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { MdAddReaction } from "react-icons/md";
-import data from "../data/data.json";
-import useEmojiPicker from "../hooks/useEmojiPicker";
-import CurrentUserContext from "../context/CurrentUserContext";
-import useMutableStack from "../hooks/useMutableStack";
+import data from "../../../../data/data.json";
+import useEmojiPicker from "../../../../hooks/useUtilities/useEmojiPicker";
+import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
+import useMutableStack from "../../../../hooks/useUtilities/useMutableStack";
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
   const {
