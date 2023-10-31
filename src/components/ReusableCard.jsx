@@ -63,7 +63,7 @@ export default function ReusableCard({ person, type }) {
   const editComment = (e) => {
     const { name, value } = e.target;
 
-    const charCount = value.length;
+    const charCount = value.trim().length;
     setcharCount(charCount);
 
     const maxCharLmtCheck = charCount < MAX_CHARS_COMMENT;
@@ -120,7 +120,9 @@ export default function ReusableCard({ person, type }) {
         <div
           key={id}
           id={id}
-          className={`user-comment space-y-4  rounded-lg bg-whitee  p-4 dark:bg-d-whitee `}
+          className={`user-comment ${
+            commentError ? "animate-shake" : ""
+          }  space-y-4  rounded-lg bg-whitee  p-4 dark:bg-d-whitee`}
         >
           {commentType === "update" && (
             <div className="flex items-center">
@@ -144,7 +146,7 @@ export default function ReusableCard({ person, type }) {
                 </figure>
               </a>
               {isCurrentUser && (
-                <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-whitee dark:bg-d-moderate-blue">
+                <div className="h-fit rounded-sm bg-moderate-blue px-1.5 text-sm text-whitee dark:bg-[#676ad1]">
                   you
                 </div>
               )}
@@ -209,7 +211,7 @@ export default function ReusableCard({ person, type }) {
                     <img
                       className="w-8 rounded-full"
                       src={image}
-                      alt="User avatar of a smiling girl with curly hair wearing sunglasses"
+                      alt="user avatar"
                     />
                   </a>
                 )}
@@ -225,7 +227,7 @@ export default function ReusableCard({ person, type }) {
                     }}
                     className={`emojiBtn ${
                       commentType === "send" && "hidden"
-                    } group btn glass btn-sm`}
+                    } group btn btn-sm`}
                     aria-labelledby="emojiBtnID"
                   >
                     <span className="sr-only" id="emojiBtnID">

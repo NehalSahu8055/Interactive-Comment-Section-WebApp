@@ -9,7 +9,7 @@ export default {
       colors: {
         // light mode
         "moderate-blue": "#5457b6",
-        "soft-red": "#bf5053",
+        "soft-red": "#f8676d",
         "light-grayish-blue": "#c5d9ec",
         "pale-red": "#ff7171",
         "dark-blue": "#1b3247",
@@ -19,19 +19,16 @@ export default {
         "whitee": "#ffffff",
 
         // dark mode
-        "d-moderate-blue": "#7289da",
-        "d-soft-red": "#bf5053",
-        "d-light-grayish-blue": "#e4e6ec",
+        "d-moderate-blue": "#7e81ff",
+        "d-soft-red": "#f8676d",
+        "d-light-grayish-blue": "rgb(203 213 225)",
         "d-pale-red": "#ff7171",
         "d-dark-blue": "#ffffff",
         "d-grayish-blue": "#e6f0f4",
         "d-light-gray": "#2c2f33",
-        "d-very-light-gray": "hsl(0, 0%, 13%)",
+        "d-very-light-gray": "#2020209c",
         "d-whitee": "#2c2f33"
-
       }
-
-
     },
   },
 
@@ -40,7 +37,6 @@ export default {
   },
   plugins: [
     require("daisyui"),
-
 
     function ({ addVariant }) {
       addVariant('child', '& > *');

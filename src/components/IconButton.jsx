@@ -22,24 +22,28 @@ export default function IconButton({ btnIndex, action }) {
       <button
         onClick={handleClick}
         key={btn.id}
-        className={`group btn btn-sm ${
+        className={`group btn btn-sm dark:hover:bg-d-very-light-gray/90 ${
           btn.id != 1
             ? "dark:border-none dark:bg-d-very-light-gray dark:text-d-moderate-blue"
             : ""
         }  flex items-center capitalize  ${
-          btn.id == 1 && "btn-error btn-outline mr-2"
+          btn.id == 1 ? "btn-error btn-outline mr-2" : ""
         } `}
       >
         <span className="sr-only">{btn.accessibleText}</span>
         <img
-          className={`${btn.id == 1 ? "group-hover:brightness-[25%]" : ""}`}
+          className={`${btn.id == 1 ? "group-hover:brightness-[25%] " : ""} ${
+            btn.id != 1
+              ? "dark:[filter:invert(41%)_sepia(83%)_saturate(683%)_hue-rotate(206deg)_brightness(95%)_contrast(101%)]"
+              : ""
+          }`}
           src={btn.address}
           alt=""
         />
         <span
-          className={`text-${btn.textColor} ${
+          className={`text-${btn.textColor} dark:text-d-${btn.textColor} ${
             btn.id == 1 ? "group-hover:brightness-[25%]" : ""
-          } font-medium ${btn.id == 1 && "-mb-1"}`}
+          } font-medium ${btn.id == 1 ? "-mb-1" : ""}`}
         >
           {btn.label}
         </span>

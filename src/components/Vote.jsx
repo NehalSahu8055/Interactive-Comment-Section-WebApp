@@ -43,12 +43,13 @@ export default function Vote({ score, isCurrentUser }) {
   };
 
   return (
-    <div className="vote-counter dark:bg-d-very-light-gray dark:text-d-moderate-blue flex w-fit items-center rounded-lg bg-very-light-gray font-medium text-moderate-blue">
+    <div className="vote-counter flex w-fit items-center rounded-lg bg-very-light-gray font-medium text-moderate-blue dark:bg-d-very-light-gray dark:text-d-moderate-blue">
       <button
         data-vote="upvotes"
         onClick={toggleVote}
         className={`grid h-full place-content-center p-3 transition ${
-          !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
+          !isCurrentUser &&
+          "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
         aria-labelledby="upvoteID"
@@ -75,8 +76,9 @@ export default function Vote({ score, isCurrentUser }) {
       <button
         data-vote="downvotes"
         onClick={toggleVote}
-        className={`grid h-[2rem] place-content-center p-3 transition ${
-          !isCurrentUser && "hover:brightness-50 hover:saturate-[5]"
+        className={`grid h-[2.2rem] place-content-center p-3 transition ${
+          !isCurrentUser &&
+          "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
         aria-labelledby="downvoteID"

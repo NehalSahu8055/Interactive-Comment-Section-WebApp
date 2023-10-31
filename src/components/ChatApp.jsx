@@ -10,7 +10,6 @@ export default function ChatApp() {
     setId(userID);
     switchUser(userID);
   };
- 
 
   return (
     <>
@@ -27,7 +26,7 @@ export default function ChatApp() {
           >
             <img
               src="/src/assets/images/avatars/image-amyrobson.webp"
-              // alt="Amy Robson"
+              alt="Amy Robson"
             />
           </button>
 
@@ -41,7 +40,7 @@ export default function ChatApp() {
           >
             <img
               src="/src/assets/images/avatars/image-maxblagun.png"
-              // alt="Max Blagun"
+              alt="Max Blagun"
             />
           </button>
 
@@ -55,7 +54,7 @@ export default function ChatApp() {
           >
             <img
               src="/src/assets/images/avatars/image-ramsesmiron.png"
-              // alt="Ramses Miron"
+              alt="Ramses Miron"
             />
           </button>
 
@@ -69,7 +68,7 @@ export default function ChatApp() {
           >
             <img
               src="/src/assets/images/avatars/image-juliusomo.webp"
-              // alt="Julius Omo"
+              alt="Julius Omo"
             />
           </button>
         </div>
