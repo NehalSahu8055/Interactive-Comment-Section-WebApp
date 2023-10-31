@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import ConfirmationModal from "../../Modals/ConfirmationModal";
+import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
+import Filter from "bad-words";
 import IconButton from "../../Buttons/IconButton";
+import { MdAddReaction } from "react-icons/md";
+import Picker from "@emoji-mart/react";
 import ReplyBox from "../Reply/ReplyBox";
 import Vote from "../../Vote/Vote";
-import Filter from "bad-words";
-import errorCommentData from "../../../../data/errorCommentData";
-import emojidata from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
-import { MdAddReaction } from "react-icons/md";
 import data from "../../../../data/data.json";
+import emojidata from "@emoji-mart/data";
+import errorCommentData from "../../../../data/errorCommentData";
+import useCurrentTime from "../../../../hooks/useRealTime/useCurrentTime";
 import useEmojiPicker from "../../../../hooks/useUtilities/useEmojiPicker";
-import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
 import useMutableStack from "../../../../hooks/useUtilities/useMutableStack";
+
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
   const {
@@ -24,6 +27,7 @@ export default function ReusableCard({ person, type }) {
   } = person;
 
   const [commentType, setcommentType] = useState(type);
+  const timestamp = useCurrentTime();
 
   const filter = new Filter();
 
@@ -160,7 +164,7 @@ export default function ReusableCard({ person, type }) {
                 </div>
               )}
               <span className="pl-4 text-grayish-blue dark:text-white">
-                {createdAt}
+                {type === "update" ? createdAt : timestamp}
               </span>
             </div>
           )}
