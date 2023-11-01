@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import TimeAgo from "react-timeago";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
 import Filter from "bad-words";
@@ -11,9 +11,9 @@ import Vote from "../../Vote/Vote";
 import data from "../../../../data/data.json";
 import emojidata from "@emoji-mart/data";
 import errorCommentData from "../../../../data/errorCommentData";
-import useCurrentTime from "../../../../hooks/useRealTime/useCurrentTime";
 import useEmojiPicker from "../../../../hooks/useUtilities/useEmojiPicker";
 import useMutableStack from "../../../../hooks/useUtilities/useMutableStack";
+import TimeStamp from "../../../../utils/TimeStamp";
 
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
@@ -27,7 +27,6 @@ export default function ReusableCard({ person, type }) {
   } = person;
 
   const [commentType, setcommentType] = useState(type);
-  const timestamp = useCurrentTime();
 
   const filter = new Filter();
 
@@ -164,7 +163,11 @@ export default function ReusableCard({ person, type }) {
                 </div>
               )}
               <span className="pl-4 text-grayish-blue dark:text-white">
-                {type === "update" ? createdAt : timestamp}
+                {type === "update" ? (
+                  createdAt
+                ) : (
+                  <TimeStamp timestamp={new Date()} />
+                )}
               </span>
             </div>
           )}
@@ -211,7 +214,7 @@ export default function ReusableCard({ person, type }) {
                 <i>{commentError}</i>
               </small>
               <div className="flex items-center justify-between pt-3">
-                {commentType == "send" && (
+                {commentType === "send" && (
                   <a
                     href="#"
                     className="cursor-pointer"
@@ -238,7 +241,7 @@ export default function ReusableCard({ person, type }) {
                       setShowEmoji((prev) => !prev);
                     }}
                     className={`emojiBtn ${
-                      commentType === "send" && "hidden"
+                      commentType === "send" ? "hidden" : ""
                     } group btn btn-sm`}
                     aria-labelledby="emojiBtnID"
                   >
@@ -251,7 +254,7 @@ export default function ReusableCard({ person, type }) {
                   <button
                     type="submit"
                     className={`${
-                      commentType === "send" && "h-fit px-7 py-3"
+                      commentType === "send" ? "h-fit px-7 py-3" : ""
                     } btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80 dark:bg-d-moderate-blue`}
                     disabled={charCount === 0}
                   >

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ErrorBoundary({ children }) {
+export default function ErrorBoundary({ children }) {
   const [error, setError] = useState({
     hasError: false,
     errorMessage: "",
@@ -32,7 +32,7 @@ function ErrorBoundary({ children }) {
   if (error.hasError) {
     // If an error occurs, return the error message
     return (
-      <div className="alert alert-error mx-auto mt-2 w-fit text-white shadow-md">
+      <div className="alert alert-error mx-auto mt-2 w-fit bg-[#be5656] text-white shadow-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 shrink-0 stroke-current"
@@ -52,5 +52,3 @@ function ErrorBoundary({ children }) {
   }
   return children;
 }
-
-export default ErrorBoundary;
