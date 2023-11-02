@@ -14,6 +14,7 @@ import errorCommentData from "../../../../data/errorCommentData";
 import useEmojiPicker from "../../../../hooks/useUtilities/useEmojiPicker";
 import useMutableStack from "../../../../hooks/useUtilities/useMutableStack";
 import TimeStamp from "../../../../utils/TimeStamp";
+import { motion } from "framer-motion";
 
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
@@ -129,7 +130,10 @@ export default function ReusableCard({ person, type }) {
   return (
     !isDeleting && (
       <>
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
           key={id}
           id={id}
           className={`user-comment ${
@@ -294,7 +298,7 @@ export default function ReusableCard({ person, type }) {
               </div>
             </>
           )}
-        </div>
+        </motion.div>
 
         {/* Handles adding reply card by current user in the reply box */}
         {!isEmpty && (

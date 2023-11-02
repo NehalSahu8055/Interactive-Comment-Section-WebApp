@@ -23,12 +23,17 @@ export default function IconButton({ btnIndex, action }) {
       onClick={handleClick}
       key={btn.id}
       className={`group btn btn-sm dark:bg-d-very-light-gray  ${
-        btn.id != 1 ? "dark:border-none dark:text-d-moderate-blue dark:hover:bg-d-very-light-gray/90" : ""
+        btn.id != 1
+          ? "dark:border-none dark:text-d-moderate-blue dark:hover:bg-d-very-light-gray/90"
+          : ""
       }  flex items-center capitalize  ${
         btn.id == 1 ? "btn-error btn-outline mr-2" : ""
       } `}
+      aria-labelledby={`iconButtonID${btn.id}`}
     >
-      <span className="sr-only">{btn.accessibleText}</span>
+      <span id={`iconButtonID${btn.id}`} className="sr-only">
+        {btn.accessibleText}
+      </span>
       <img
         className={`${btn.id == 1 ? "group-hover:brightness-[25%] " : ""} ${
           btn.id != 1

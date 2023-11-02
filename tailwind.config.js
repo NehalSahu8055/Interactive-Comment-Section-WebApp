@@ -34,7 +34,7 @@ export default {
   },
 
   daisyui: {
-    themes: ["light", "dark"],
+    themes: ["light", "dark","coffee","night"],
   },
   plugins: [
     require("daisyui"),

@@ -57,7 +57,7 @@ export default function Vote({ commentType, score, isCurrentUser }) {
         aria-labelledby="upvoteID"
       >
         <span id="upvoteID" className="sr-only">
-          {hasUpvoted ? "You have upvoted" : "Click to upvote the comment"}
+          {hasUpvoted ? "You have upvoted" : "upvote this comment"}
         </span>
         <img
           className=""
@@ -86,7 +86,7 @@ export default function Vote({ commentType, score, isCurrentUser }) {
         aria-labelledby="downvoteID"
       >
         <span id="downvoteID" className="sr-only">
-          "Click to downvote the comment"
+          downvote this comment
         </span>
         <img
           src="/src/assets/images/icon-minus.svg"

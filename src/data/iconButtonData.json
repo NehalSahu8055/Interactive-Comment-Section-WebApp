@@ -2,21 +2,21 @@
   {
     "id": 1,
     "label": "Delete",
-    "accessibleText": "Click here to delete your comment",
+    "accessibleText": "delete your comment",
     "address": "/src/assets/images/icon-delete.svg",
     "textColor": "soft-red"
   },
   {
     "id": 2,
     "label": "Edit",
-    "accessibleText": "Click here to edit your comment",
+    "accessibleText": "edit your comment",
     "address": "/src/assets/images/icon-edit.svg",
     "textColor": "moderate-blue"
   },
   {
     "id": 3,
     "label": "Reply",
-    "accessibleText": "Click here to reply to your comment",
+    "accessibleText": "reply to this comment",
     "address": "/src/assets/images/icon-reply.svg",
     "textColor": "moderate-blue"
   }
