@@ -62,7 +62,7 @@ export default function ReusableCard({ person, type }) {
       return { ...prev, isEditing: false };
     });
 
-    commentType === "send" && setcommentType("update");
+    commentType === "send" ? setcommentType("update") : "";
   };
 
   const editComment = (e) => {

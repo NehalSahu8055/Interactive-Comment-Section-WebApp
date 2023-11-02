@@ -1,21 +1,24 @@
 import React, { useContext, useState } from "react";
 import CurrentUserContext from "../../context/userContext/CurrentUserContext";
+import useThemeToggle from "../../hooks/useUtilities/useThemeToggle";
 
 export default function Sidebar() {
   const { currentUserID, switchUser } = useContext(CurrentUserContext);
   const [id, setId] = useState(currentUserID);
 
-  const handleUserSwitch = (userID) => {
+  const userSwitch = (userID) => {
     setId(userID);
     switchUser(userID);
   };
+
+  const { toggleMode } = useThemeToggle();
   return (
     <aside className="fixed top-0 z-30 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10 shadow-xl dark:bg-d-whitee">
       <h2 className="sr-only">Main Sidebar</h2>
       <div className="avatar-group flex flex-col items-center justify-center -space-y-6 overflow-visible hover:space-y-1">
         <button
           id={1}
-          onClick={() => handleUserSwitch(1)}
+          onClick={() => userSwitch(1)}
           className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
             id === 1 ? "before:absolute" : "before:hidden"
           } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
@@ -29,7 +32,7 @@ export default function Sidebar() {
 
         <button
           id={2}
-          onClick={() => handleUserSwitch(2)}
+          onClick={() => userSwitch(2)}
           className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
             id === 2 ? "before:absolute" : "before:hidden"
           } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
@@ -43,7 +46,7 @@ export default function Sidebar() {
 
         <button
           id={3}
-          onClick={() => handleUserSwitch(3)}
+          onClick={() => userSwitch(3)}
           className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
             id === 3 ? "before:absolute" : "before:hidden"
           } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
@@ -57,7 +60,7 @@ export default function Sidebar() {
 
         <button
           id={4}
-          onClick={() => handleUserSwitch(4)}
+          onClick={() => userSwitch(4)}
           className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
             id === 4 ? "before:absolute" : "before:hidden"
           } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
@@ -72,11 +75,16 @@ export default function Sidebar() {
       <div className="theme  grid place-content-center">
         <label className="swap swap-rotate fill-white">
           {/* this hidden checkbox controls the state */}
-          <input type="checkbox" aria-label="hello" />
+          <input
+            id="toggle-modeID"
+            onChange={toggleMode}
+            type="checkbox"
+            checked={localStorage.getItem("theme") === "light"}
+          />
 
           {/* sun icon */}
           <svg
-            className="fill-Fwhite swap-off h-8 w-8"
+            className="swap-on h-8 w-8 fill-whitee"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -85,7 +93,7 @@ export default function Sidebar() {
 
           {/* moon icon */}
           <svg
-            className="swap-on h-8 w-8 fill-white"
+            className="swap-off h-8 w-8 fill-whitee"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >

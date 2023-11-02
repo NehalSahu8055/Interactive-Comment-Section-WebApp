@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 
 import ReusableCard from "./ReusableCard";
 import data from "../../../../data/data.json";
