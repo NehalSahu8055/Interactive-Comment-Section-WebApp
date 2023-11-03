@@ -138,7 +138,7 @@ export default function ReusableCard({ person, type }) {
           id={id}
           className={`user-comment ${
             commentError ? "animate-shake" : ""
-          }  space-y-4  rounded-lg bg-whitee  p-4 dark:bg-d-whitee`}
+          }  space-y-4 rounded-lg  bg-whitee p-4 shadow-[2px_3px_7px_0px_#00000012] dark:bg-d-whitee`}
         >
           {commentType === "update" && (
             <div className="flex items-center">
@@ -198,7 +198,7 @@ export default function ReusableCard({ person, type }) {
 
               {/* Handles emoji picker */}
               {showEmoji && (
-                <div className="absolute right-2 top-full z-10 bg-very-light-gray shadow-xl  dark:bg-d-very-light-gray">
+                <div className="absolute right-2 top-full z-10 rounded-xl bg-very-light-gray shadow-xl  dark:bg-d-very-light-gray">
                   <Picker
                     data={emojidata}
                     onEmojiSelect={addEmoji}
@@ -208,6 +208,7 @@ export default function ReusableCard({ person, type }) {
                     previewPosition="none"
                     skinTonePosition="none"
                     emojiButtonColors={["skyblue", "lightgreen", "violet"]}
+                    autoFocus
                   />
                 </div>
               )}

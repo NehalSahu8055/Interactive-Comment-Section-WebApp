@@ -16,7 +16,7 @@ export default {
         "dark-blue": "#1b3247",
         "grayish-blue": "#6d8b99",
         "light-gray": "#e3eaed",
-        "very-light-gray": "#f4f8fb",
+        "very-light-gray": "#f5f6fa",
         "whitee": "#ffffff",
 
         // dark mode
@@ -34,7 +34,7 @@ export default {
   },
 
   daisyui: {
-    themes: ["light", "dark","coffee","night"],
+    themes: ["light", "dark"],
   },
   plugins: [
     require("daisyui"),

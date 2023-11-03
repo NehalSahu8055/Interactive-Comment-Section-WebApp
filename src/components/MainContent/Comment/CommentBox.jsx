@@ -9,7 +9,7 @@ export default function CommentBox() {
   });
 
   return comments ? (
-    <div className="flex max-w-[343px] flex-col gap-4">{comments}</div>
+    <div className="mx-3 flex max-w-[45.625rem] flex-col gap-4">{comments}</div>
   ) : (
     <div className="text-2xl font-medium text-soft-red">
       🙅 Sorry No Comment Received 🙅‍♀️

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import CurrentUserContext from "../../context/userContext/CurrentUserContext";
 import useThemeToggle from "../../hooks/useUtilities/useThemeToggle";
+import { motion } from "framer-motion";
 
 export default function Sidebar() {
   const mode = localStorage.getItem("theme");
@@ -15,43 +16,78 @@ export default function Sidebar() {
 
   const { toggleMode } = useThemeToggle();
   return (
-    <aside className="fixed top-0 z-30 flex min-h-screen flex-col justify-between bg-slate-300 px-2.5 py-10 shadow-xl transition-all duration-300 ease-linear dark:bg-d-whitee ">
+    <motion.aside
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0 }}
+      className="rounded-r-box fixed top-0 z-30 flex min-h-screen flex-col justify-between bg-whitee px-3 py-10  shadow-[2px_3px_7px_0px_#00000012] transition-all duration-300 ease-linear dark:bg-d-whitee dark:shadow "
+    >
       <h2 className="sr-only">Main Sidebar</h2>
-      <div className="avatar-group flex flex-col items-center justify-center -space-y-6 overflow-visible hover:space-y-1">
-        <button
+      <div className="avatar-group flex flex-col items-center justify-center space-y-4 overflow-visible">
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.25,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
           id={1}
           onClick={() => userSwitch(1)}
-          className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
+          className={`avatar w-9 overflow-visible border-none ring-2 ${
+            currentUserID === 1
+              ? "ring-moderate-blue dark:ring-d-moderate-blue"
+              : ""
+          } duration-500  ${
             id === 1 ? "before:absolute" : "before:hidden"
-          } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
+          } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
           aria-label={`${currentUserID === 1 ? "Current" : ""} User Amy Robson`}
         >
           <img
             src="/src/assets/images/avatars/image-amyrobson.webp"
             alt="Amy Robson"
           />
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.5,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
           id={2}
           onClick={() => userSwitch(2)}
-          className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
+          className={`avatar w-9 ${
+            currentUserID === 2
+              ? "ring-moderate-blue dark:ring-d-moderate-blue"
+              : ""
+          } overflow-visible border-none duration-500 ${
             id === 2 ? "before:absolute" : "before:hidden"
-          } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
+          } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
           aria-label={`${currentUserID === 2 ? "Current" : ""} User Max Blagun`}
         >
           <img
             src="/src/assets/images/avatars/image-maxblagun.png"
             alt="Max Blagun"
           />
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.75,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
           id={3}
           onClick={() => userSwitch(3)}
-          className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
+          className={`avatar ${
+            currentUserID === 3
+              ? "ring-moderate-blue dark:ring-d-moderate-blue"
+              : ""
+          }  w-9 overflow-visible border-none ring-2 duration-500 ${
             id === 3 ? "before:absolute" : "before:hidden"
-          } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
+          } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
           aria-label={`${
             currentUserID === 3 ? "Current" : ""
           } User Ramses Miron`}
@@ -60,21 +96,31 @@ export default function Sidebar() {
             src="/src/assets/images/avatars/image-ramsesmiron.png"
             alt="Ramses Miron"
           />
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
           id={4}
           onClick={() => userSwitch(4)}
-          className={`avatar w-10 overflow-visible border-none ring-1 duration-1000 ${
+          className={`avatar ${
+            currentUserID === 4
+              ? "ring-moderate-blue dark:ring-d-moderate-blue"
+              : ""
+          }  w-9 overflow-visible border-none ring-2 duration-500 ${
             id === 4 ? "before:absolute" : "before:hidden"
-          } ring-1 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-14 `}
+          } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
           aria-label={`${currentUserID === 4 ? "Current" : ""} User Julius Omo`}
         >
           <img
             src="/src/assets/images/avatars/image-juliusomo.webp"
             alt="Julius Omo"
           />
-        </button>
+        </motion.button>
       </div>
       <div className="theme grid place-content-center">
         {/* Handle theme toggling */}
@@ -92,7 +138,7 @@ export default function Sidebar() {
 
             {/* sun icon */}
             <svg
-              className="swap-on h-8 w-8 fill-whitee"
+              className="swap-on h-8 w-9 fill-yellow-500"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -101,7 +147,7 @@ export default function Sidebar() {
 
             {/* moon icon */}
             <svg
-              className="swap-off h-8 w-8 fill-whitee"
+              className="swap-off h-8 w-9 fill-whitee"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -110,6 +156,6 @@ export default function Sidebar() {
           </label>
         </fieldset>
       </div>
-    </aside>
+    </motion.aside>
   );
 }
