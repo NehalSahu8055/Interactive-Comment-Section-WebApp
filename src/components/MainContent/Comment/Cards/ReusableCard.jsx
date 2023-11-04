@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import TimeAgo from "react-timeago";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
 import Filter from "bad-words";
@@ -28,8 +27,6 @@ export default function ReusableCard({ person, type }) {
   } = person;
 
   const [commentType, setcommentType] = useState(type);
-
-  const filter = new Filter();
 
   const [isModified, setisModified] = useState({
     isDeleting: false,
@@ -95,12 +92,6 @@ export default function ReusableCard({ person, type }) {
 
   const isCurrentUser = id === currentUserID;
 
-  useEffect(() => {
-    setisModified((prev) => {
-      return { ...prev, isReplying: false };
-    });
-  }, [currentUserID]);
-
   //  Handles Emoji Picker Functions
   const { showEmoji, setShowEmoji, addEmoji } = useEmojiPicker(
     comment,
@@ -114,8 +105,6 @@ export default function ReusableCard({ person, type }) {
     (person) => person.id === currentUserID,
   );
 
-  const { push, top, stack, isEmpty } = useMutableStack([]);
-
   useEffect(() => {
     if (isReplying) {
       if (replyCard && stack.indexOf(replyCard) === -1) {
@@ -126,12 +115,23 @@ export default function ReusableCard({ person, type }) {
     }
   }, [isReplying]);
 
+  const { push, stack, isEmpty } = useMutableStack([]);
+
   const replyCards = stack
     .map((reply) => (
       <ReusableCard person={reply} type={"send"} key={reply.id} />
     ))
     .reverse();
-  console.log(isReplying);
+
+  // Handles  Reset isReplying when user switch Functions
+  useEffect(() => {
+    setisModified((prev) => {
+      return { ...prev, isReplying: false };
+    });
+  }, [currentUserID]);
+
+  const filter = new Filter();
+
   return (
     !isDeleting && (
       <>
