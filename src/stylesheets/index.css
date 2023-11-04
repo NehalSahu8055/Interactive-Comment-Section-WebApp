@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Daisy UI */
+:root[data-theme="light"] {
+  background-color: #f5f6fa;
+}
+
+:root[data-theme="dark"] {
+  background-color: #202020;
+}
+
 /* ---------------- Relative Fonts -----------------*/
 
 @font-face {
@@ -116,11 +125,4 @@
   60% {
     transform: translate3d(4px, 0, 0);
   }
-}
-
-[data-theme="dark"] #root {
-  background-color: #2020209c;
-}
-[data-theme="light"] #root {
-  background-color: #f5f6fa;
 }

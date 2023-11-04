@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function ReplyBox({ replyCard, setisModified }) {
+export default function ReplyBox({ replyCard,isReplying, setisModified }) {
   const [isExpanded, setisExpanded] = useState(true);
 
   const toggleComment = (e) => {

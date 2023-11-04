@@ -35,7 +35,6 @@ export default function ReusableCard({ person, type }) {
     isDeleting: false,
     isEditing: false,
     isReplying: false,
-    isSending: false,
   });
 
   const { isDeleting, isEditing, isReplying } = isModified;
@@ -63,7 +62,7 @@ export default function ReusableCard({ person, type }) {
       return { ...prev, isEditing: false };
     });
 
-    commentType === "send" ? setcommentType("update") : "";
+    commentType === "send" && setcommentType("update");
   };
 
   const editComment = (e) => {
@@ -96,6 +95,12 @@ export default function ReusableCard({ person, type }) {
 
   const isCurrentUser = id === currentUserID;
 
+  useEffect(() => {
+    setisModified((prev) => {
+      return { ...prev, isReplying: false };
+    });
+  }, [currentUserID]);
+
   //  Handles Emoji Picker Functions
   const { showEmoji, setShowEmoji, addEmoji } = useEmojiPicker(
     comment,
@@ -126,7 +131,7 @@ export default function ReusableCard({ person, type }) {
       <ReusableCard person={reply} type={"send"} key={reply.id} />
     ))
     .reverse();
-
+  console.log(isReplying);
   return (
     !isDeleting && (
       <>
@@ -198,7 +203,11 @@ export default function ReusableCard({ person, type }) {
 
               {/* Handles emoji picker */}
               {showEmoji && (
-                <div className="absolute right-2 top-full z-10 rounded-xl bg-very-light-gray shadow-xl  dark:bg-d-very-light-gray">
+                <div
+                  className={`absolute top-full ${
+                    commentType === "send" ? "right-24" : "left-0 mt-2 "
+                  } dark:bg-d-very-light-gray} z-50 rounded-xl bg-very-light-gray  shadow-xl`}
+                >
                   <Picker
                     data={emojidata}
                     onEmojiSelect={addEmoji}
@@ -246,7 +255,7 @@ export default function ReusableCard({ person, type }) {
                       setShowEmoji((prev) => !prev);
                     }}
                     className={`emojiBtn ${
-                      commentType === "send" ? "hidden" : ""
+                      commentType === "send" ? "mr-6" : ""
                     } group btn btn-sm`}
                     aria-labelledby="emojiBtnID"
                   >
@@ -260,7 +269,7 @@ export default function ReusableCard({ person, type }) {
                     type="submit"
                     className={`${
                       commentType === "send" ? "h-fit px-7 py-3" : ""
-                    } btn btn-sm w-fit bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80 dark:bg-d-moderate-blue`}
+                    } btn btn-sm w-fit border-none bg-moderate-blue font-medium text-whitee transition-all hover:bg-moderate-blue hover:opacity-80`}
                     disabled={charCount === 0}
                   >
                     {commentType === "update" ? "Update" : "Send"}

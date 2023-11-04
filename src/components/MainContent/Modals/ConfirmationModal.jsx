@@ -28,7 +28,7 @@ export default function ConfirmationModal({ setisModified }) {
           </button>
           <button
             onClick={deleteComment}
-            className="btn btn-error font-medium leading-6 text-white bg-[#be4d52]"
+            className="btn btn-error bg-[#be4d52] font-medium leading-6 text-white"
           >
             YES, DELETE
           </button>
