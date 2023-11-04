@@ -14,7 +14,7 @@
 
 ### 🎨 Features
 
-- Tested with the NVDA screen reader on desktop
+- 🧏 Tested on windows OS with NVDA screen reader
 - 💯 Responsive
 - 🪁 Relative Source Font
 - 💈 Custom Scrollbar
@@ -34,7 +34,7 @@
 - Theme Toggle with system pref + (manual + localstorage)
 - RealTime timestamp
 - LocalStorage for comments
-- Detect Censor words
+- Detect Censor words and make it `*`
 - Emoji Picker
 
 📈 Scored 99% on Google Pagespeed Insights!.
