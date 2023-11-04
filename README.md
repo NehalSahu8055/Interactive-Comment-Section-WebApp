@@ -33,9 +33,9 @@
 - Switch Users
 - Theme Toggle with system pref + (manual + localstorage)
 - RealTime timestamp
-- LocalStorage for comments
 - Detect Censor words and make it `*`
 - Emoji Picker
+- LocalStorage for comments[ Will Implement soon]
 
 📈 Scored 99% on Google Pagespeed Insights!.
 
