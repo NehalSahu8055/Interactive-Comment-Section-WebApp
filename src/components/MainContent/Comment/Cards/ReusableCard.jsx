@@ -299,7 +299,7 @@ export default function ReusableCard({ person, type }) {
                   <div className="flex">
                     <IconButton btnIndex="0" action={setisModified} />
                     <IconButton btnIndex="1" action={setisModified} />
-                    <ConfirmationModal setisModified={setisModified} />
+                    <ConfirmationModal setisModified={setisModified} isDeleting={isDeleting}/>
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />

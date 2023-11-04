@@ -15,6 +15,7 @@
 ### 🎨 Features
 
 - 🧏 Tested on windows OS with NVDA screen reader
+- ⌨️ Accessible with keyboard
 - 💯 Responsive
 - 🪁 Relative Source Font
 - 💈 Custom Scrollbar
@@ -26,7 +27,7 @@
 - React Hooks
 - Implementing ErrorBoundary
 - Complex State Management
-- Advance Accessibility
+- Intermediate Accessibility
 
 ### 💡Bonus
 
@@ -35,7 +36,11 @@
 - RealTime timestamp
 - Detect Censor words and make it `*`
 - Emoji Picker
-- LocalStorage for comments[ Will Implement soon]
+
+### Future Updates
+
+- LocalStorage for comments
+- Making more accessible
 
 📈 Scored 99% on Google Pagespeed Insights!.
 

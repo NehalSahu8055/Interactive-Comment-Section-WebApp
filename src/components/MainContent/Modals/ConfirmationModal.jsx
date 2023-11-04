@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-export default function ConfirmationModal({ setisModified }) {
+export default function ConfirmationModal({ setisModified, isDeleting }) {
   const deleteComment = (e) => {
     setisModified((prev) => {
       return { ...prev, isDeleting: !prev.isDeleting };
@@ -8,7 +8,7 @@ export default function ConfirmationModal({ setisModified }) {
   };
 
   return (
-    <dialog id="confirmation-modal" className="modal backdrop-blur-[0.15rem]">
+    !isDeleting && <dialog id="confirmation-modal" className="modal backdrop-blur-[0.15rem]">
       <form
         method="dialog"
         className="modal-box max-w-[23rem] rounded-[0.32rem]"
