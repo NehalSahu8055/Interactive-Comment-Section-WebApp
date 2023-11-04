@@ -298,9 +298,8 @@ export default function ReusableCard({ person, type }) {
                 {isCurrentUser ? (
                   <div className="flex">
                     <IconButton btnIndex="0" action={setisModified} />
-
                     <IconButton btnIndex="1" action={setisModified} />
-                    <ConfirmationModal tabIndex={-1} setisModified={setisModified} />
+                    <ConfirmationModal setisModified={setisModified} />
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />

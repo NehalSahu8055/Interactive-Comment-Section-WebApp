@@ -36,15 +36,15 @@ export default function UserSwitch() {
             id={`user${id}`}
             onClick={() => userSwitch(id)}
             className={`avatar w-9 overflow-visible border-none ring-2 ${
-              currentUserID === userID
+              currentUserID === id
                 ? "ring-moderate-blue dark:ring-d-moderate-blue"
                 : ""
             } duration-500  ${
               id === userID ? "before:absolute" : "before:hidden"
             } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
             aria-label={`${
-              currentUserID === userID ? "Current" : ""
-            } ${username}`}
+              currentUserID === id ? "Current" : ""
+            } User ${username}`}
           >
             <img src={image} alt={username} />
           </motion.button>
@@ -69,15 +69,15 @@ export default function UserSwitch() {
             id={id}
             onClick={() => userSwitch(id)}
             className={`avatar w-9 overflow-visible border-none ring-2 ${
-              currentUserID === userID
+              currentUserID === id
                 ? "ring-moderate-blue dark:ring-d-moderate-blue"
                 : ""
             } duration-500  ${
               id === userID ? "before:absolute" : "before:hidden"
             } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
             aria-label={`${
-              currentUserID === userID ? "Current" : ""
-            } ${username}`}
+              currentUserID === id ? "Current" : ""
+            } User ${username}`}
           >
             <img src={image} alt={username} />
           </motion.button>

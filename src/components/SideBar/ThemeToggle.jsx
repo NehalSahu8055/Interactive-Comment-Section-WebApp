@@ -6,7 +6,7 @@ export default function ThemeToggle() {
 
   const mode = localStorage.getItem("theme");
   return (
-    <div className="theme grid place-content-center">
+    <div className="theme grid place-content-center ">
       {/* Handle theme toggling */}
       <fieldset className="theme-toggle">
         <legend className="sr-only">Click to change theme</legend>
