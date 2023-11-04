@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import useVoting from "../../../hooks/useUtilities/useVoting";
 
 export default function Vote({ commentType, score, isCurrentUser }) {
+  const upvoteID = useId();
+  const downvoteID = useId();
+  const totalUpvotesID = useId();
+
   const [hasVoted, sethasVoted] = useState({
     hasUpvoted: false,
     hasDownvoted: false,
@@ -54,9 +58,9 @@ export default function Vote({ commentType, score, isCurrentUser }) {
           "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
-        aria-labelledby="upvoteID"
+        aria-labelledby={upvoteID}
       >
-        <span id="upvoteID" className="sr-only">
+        <span id={upvoteID} className="sr-only">
           {hasUpvoted ? "You have upvoted" : "upvote this comment"}
         </span>
         <img
@@ -68,11 +72,11 @@ export default function Vote({ commentType, score, isCurrentUser }) {
       </button>
       <span
         className="grid h-full place-content-center px-1"
-        aria-labelledby="totalUpvotesID"
+        aria-labelledby={totalUpvotesID}
       >
         {state}
       </span>
-      <span className="sr-only" id="totalUpvotesID">
+      <span className="sr-only" id={totalUpvotesID}>
         Live total upvotes is {state}{" "}
       </span>
       <button
@@ -83,9 +87,9 @@ export default function Vote({ commentType, score, isCurrentUser }) {
           "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
-        aria-labelledby="downvoteID"
+        aria-labelledby={downvoteID}
       >
-        <span id="downvoteID" className="sr-only">
+        <span id={downvoteID} className="sr-only">
           downvote this comment
         </span>
         <img src="/images/icon-minus.svg" aria-hidden="true" alt="" />

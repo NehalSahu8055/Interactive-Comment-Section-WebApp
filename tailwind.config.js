@@ -14,7 +14,7 @@ export default {
         "light-grayish-blue": "#c5d9ec",
         "pale-red": "#ff7171",
         "dark-blue": "#1b3247",
-        "grayish-blue": "#6d8b99",
+        "grayish-blue": "#5c7682",
         "light-gray": "#e3eaed",
         "very-light-gray": "#f5f6fa",
         "whitee": "#ffffff",

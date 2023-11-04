@@ -32,8 +32,8 @@ export default function UserSwitch() {
               delay: 0.25,
               ease: [0, 0.71, 0.2, 1.01],
             }}
-            key={id}
-            id={id}
+            key={`user${id}`}
+            id={`user${id}`}
             onClick={() => userSwitch(id)}
             className={`avatar w-9 overflow-visible border-none ring-2 ${
               currentUserID === userID

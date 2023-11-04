@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useId, useState } from "react";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
 import Filter from "bad-words";
@@ -130,6 +130,7 @@ export default function ReusableCard({ person, type }) {
   }, [currentUserID]);
 
   const filter = new Filter();
+  const updateUserID = useId();
 
   return (
     !isDeleting && (
@@ -149,9 +150,9 @@ export default function ReusableCard({ person, type }) {
               <a
                 href="#"
                 className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray dark:hover:bg-d-light-gray"
-                aria-labelledby="update-userID"
+                aria-labelledby={updateUserID}
               >
-                <span className="sr-only" id="update-userID">
+                <span className="sr-only" id={updateUserID}>
                   Click this to view profile
                 </span>
                 <figure className="flex items-center gap-4 pr-1  font-medium">
@@ -299,7 +300,7 @@ export default function ReusableCard({ person, type }) {
                     <IconButton btnIndex="0" action={setisModified} />
 
                     <IconButton btnIndex="1" action={setisModified} />
-                    <ConfirmationModal setisModified={setisModified} />
+                    <ConfirmationModal tabIndex={-1} setisModified={setisModified} />
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />
