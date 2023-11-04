@@ -3,21 +3,21 @@
     "id": 1,
     "label": "Delete",
     "accessibleText": "delete your comment",
-    "address": "/src/assets/images/icon-delete.svg",
+    "address": "/images/icon-delete.svg",
     "textColor": "soft-red"
   },
   {
     "id": 2,
     "label": "Edit",
     "accessibleText": "edit your comment",
-    "address": "/src/assets/images/icon-edit.svg",
+    "address": "/images/icon-edit.svg",
     "textColor": "moderate-blue"
   },
   {
     "id": 3,
     "label": "Reply",
     "accessibleText": "reply to this comment",
-    "address": "/src/assets/images/icon-reply.svg",
+    "address": "/images/icon-reply.svg",
     "textColor": "moderate-blue"
   }
 ]

@@ -12,9 +12,7 @@ export default function ReplyBox({ replyCard, isReplying, setisModified }) {
     // Handle Toggling Plus Minus Image for toggleComment
     const icon = e.currentTarget.children[1];
 
-    icon.src = !isExpanded
-      ? "/src/assets/images/icon-minus.svg"
-      : "/src/assets/images/icon-plus.svg";
+    icon.src = !isExpanded ? "/images/icon-minus.svg" : "/images/icon-plus.svg";
     setisExpanded((prev) => !prev);
   };
 
@@ -39,7 +37,7 @@ export default function ReplyBox({ replyCard, isReplying, setisModified }) {
 
         <img
           className=""
-          src="/src/assets/images/icon-minus.svg"
+          src="/images/icon-minus.svg"
           alt=""
           aria-hidden="true"
         />

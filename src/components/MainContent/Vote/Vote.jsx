@@ -61,7 +61,7 @@ export default function Vote({ commentType, score, isCurrentUser }) {
         </span>
         <img
           className=""
-          src="/src/assets/images/icon-plus.svg"
+          src="/images/icon-plus.svg"
           aria-hidden="true"
           alt=""
         />
@@ -88,11 +88,7 @@ export default function Vote({ commentType, score, isCurrentUser }) {
         <span id="downvoteID" className="sr-only">
           downvote this comment
         </span>
-        <img
-          src="/src/assets/images/icon-minus.svg"
-          aria-hidden="true"
-          alt=""
-        />
+        <img src="/images/icon-minus.svg" aria-hidden="true" alt="" />
       </button>
     </div>
   );

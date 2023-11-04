@@ -3,7 +3,6 @@ import CommentCard from "./Cards/CommentCard";
 import data from "../../../data/data.json";
 
 export default function CommentBox() {
-  // document.body.scrollTop = document.body.scrollHeight;
   const comments = data.comments.map((cmnt) => {
     return <CommentCard cardID={cmnt.id} key={cmnt.id} />;
   });

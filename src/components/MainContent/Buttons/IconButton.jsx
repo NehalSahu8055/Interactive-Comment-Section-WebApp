@@ -5,13 +5,20 @@ export default function IconButton({ btnIndex, action }) {
   const btn = iconButtonData[btnIndex];
 
   const handleClick = (e) => {
+    // Handle delete button
     if (btn.id == 1) {
       document.getElementById("confirmation-modal").showModal();
-    } else if (btn.id == 2) {
+    }
+
+    // Handle edit button
+    else if (btn.id == 2) {
       action((prev) => {
         return { ...prev, isEditing: true };
       });
-    } else {
+    }
+
+    // Handle reply button
+    else {
       action((prev) => {
         return { ...prev, isReplying: !prev.isReplying };
       });

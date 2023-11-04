@@ -23,7 +23,6 @@ export default function ReusableCard({ person, type }) {
     createdAt,
     score,
     user: { username, image },
-    replies,
   } = person;
 
   const [commentType, setcommentType] = useState(type);

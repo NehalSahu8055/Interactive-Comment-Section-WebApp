@@ -1,7 +1,6 @@
 import React from "react";
 import ReusableCard from "./ReusableCard";
 import data from "../../../../data/data.json";
-import ReplyBox from "../Reply/ReplyBox";
 
 export default function CommentCard({ cardID }) {
   const comment = data.comments.find((person) => person.id === cardID);
@@ -14,9 +13,6 @@ export default function CommentCard({ cardID }) {
     <>
       {/* Handles comments  */}
       <ReusableCard person={comment} type={"update"} />
-
-      {/* Handles replies under comment  */}
-      {/* {comment.replies.length > 0 && <ReplyBox replyCard={replies} />} */}
     </>
   );
 }

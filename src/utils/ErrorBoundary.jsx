@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function ErrorBoundary({ children }) {
   const [error, setError] = useState({
@@ -14,25 +15,22 @@ export default function ErrorBoundary({ children }) {
       });
     };
 
-    const clearError = () => {
-      setError({
-        hasError: false,
-        errorMessage: "",
-      });
-    };
-
     window.addEventListener("error", handleError);
 
-    // Clear the error when the component unmounts
     return () => {
       window.removeEventListener("error", handleError);
     };
-  }, []); // Ensure this effect runs only once
+  }, []);
 
   if (error.hasError) {
     // If an error occurs, return the error message
     return (
-      <div className="alert alert-error mx-auto mt-2 w-fit bg-[#be5656] text-white shadow-md">
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0 }}
+        className="alert alert-error mx-auto mt-2 w-fit bg-[#be5656] text-white shadow-md"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 shrink-0 stroke-current"
@@ -47,7 +45,7 @@ export default function ErrorBoundary({ children }) {
           />
         </svg>
         <span>Error! {error.errorMessage}</span>
-      </div>
+      </motion.div>
     );
   }
   return children;
