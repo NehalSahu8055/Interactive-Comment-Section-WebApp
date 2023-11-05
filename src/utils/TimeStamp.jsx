@@ -1,5 +1,10 @@
-import React from "react";
 import TimeAgo from "react-timeago";
+import PropTypes from "prop-types";
+
+// Prop validation
+TimeStamp.propTypes = {
+  timestamp: PropTypes.instanceOf(Date).isRequired,
+};
 
 export default function TimeStamp({ timestamp }) {
   return (

@@ -1,4 +1,3 @@
-import React, { useContext, useState } from "react";
 import CommentCard from "./Cards/CommentCard";
 import data from "../../../data/data.json";
 

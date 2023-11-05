@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-export default function useEmojiPicker(comment, formData, setFormData, commentError) {
+export default function useEmojiPicker(comment, formData, setFormData) {
 
     const [showEmoji, setShowEmoji] = useState(false);
 

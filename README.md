@@ -27,6 +27,7 @@
 - React Hooks
 - Implementing ErrorBoundary
 - Complex State Management
+- Prop Validation
 - Intermediate Accessibility
 
 ### 💡Bonus

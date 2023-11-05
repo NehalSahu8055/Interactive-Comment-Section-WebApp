@@ -1,4 +1,3 @@
-import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import UserSwitch from "./UserSwitch";
 import ThemeToggle from "./ThemeToggle";

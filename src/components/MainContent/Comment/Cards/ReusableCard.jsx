@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useId, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
+import PropTypes from "prop-types";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
 import Filter from "bad-words";
@@ -14,6 +15,12 @@ import useEmojiPicker from "../../../../hooks/useUtilities/useEmojiPicker";
 import useMutableStack from "../../../../hooks/useUtilities/useMutableStack";
 import TimeStamp from "../../../../utils/TimeStamp";
 import { motion } from "framer-motion";
+
+// Prop Validation
+ReusableCard.propTypes = {
+  person: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
+};
 
 export default function ReusableCard({ person, type }) {
   const { currentUserID } = useContext(CurrentUserContext);
@@ -104,6 +111,8 @@ export default function ReusableCard({ person, type }) {
     (person) => person.id === currentUserID,
   );
 
+  const { push, stack, isEmpty } = useMutableStack([]);
+
   useEffect(() => {
     if (isReplying) {
       if (replyCard && stack.indexOf(replyCard) === -1) {
@@ -113,8 +122,6 @@ export default function ReusableCard({ person, type }) {
       }
     }
   }, [isReplying]);
-
-  const { push, stack, isEmpty } = useMutableStack([]);
 
   const replyCards = stack
     .map((reply) => (
@@ -299,7 +306,10 @@ export default function ReusableCard({ person, type }) {
                   <div className="flex">
                     <IconButton btnIndex="0" action={setisModified} />
                     <IconButton btnIndex="1" action={setisModified} />
-                    <ConfirmationModal setisModified={setisModified} isDeleting={isDeleting}/>
+                    <ConfirmationModal
+                      setisModified={setisModified}
+                      isDeleting={isDeleting}
+                    />
                   </div>
                 ) : (
                   <IconButton btnIndex="2" action={setisModified} />
@@ -310,13 +320,7 @@ export default function ReusableCard({ person, type }) {
         </motion.div>
 
         {/* Handles adding reply card by current user in the reply box */}
-        {!isEmpty && (
-          <ReplyBox
-            isReplying={isReplying}
-            setisModified={setisModified}
-            replyCard={replyCards}
-          />
-        )}
+        {!isEmpty && <ReplyBox replyCard={replyCards} />}
       </>
     )
   );

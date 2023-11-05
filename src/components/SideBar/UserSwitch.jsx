@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import data from "../../data/data";
 import { motion } from "framer-motion";
 import CurrentUserContext from "../../context/userContext/CurrentUserContext";

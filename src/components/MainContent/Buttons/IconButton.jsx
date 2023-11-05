@@ -1,6 +1,12 @@
 import PropTypes from "prop-types";
 import iconButtonData from "../../../data/iconButtonData.json";
 
+// Props Validation
+IconButton.propTypes = {
+  btnIndex: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
+};
+
 export default function IconButton({ btnIndex, action }) {
   const btn = iconButtonData[btnIndex];
 
@@ -59,10 +65,4 @@ export default function IconButton({ btnIndex, action }) {
       </span>
     </button>
   );
-
-  // Props Validation
-  IconButton.PropTypes = {
-    btnIndex: PropTypes.number.isRequired,
-    action: PropTypes.func.isRequired,
-  };
 }

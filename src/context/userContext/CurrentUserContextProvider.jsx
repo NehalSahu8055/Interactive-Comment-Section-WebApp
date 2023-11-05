@@ -1,5 +1,11 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import CurrentUserContext from "./CurrentUserContext";
+
+// Prop Validation
+CurrentUserContextProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default function CurrentUserContextProvider(props) {
   const [currentUserID, setCurrentUserID] = useState(2);

@@ -1,4 +1,3 @@
-import React from "react";
 import CommentBox from "./Comment/CommentBox";
 export default function MainContent() {
   return (

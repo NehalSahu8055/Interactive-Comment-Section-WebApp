@@ -1,5 +1,13 @@
-import React, { useId, useState } from "react";
+import { useId, useState } from "react";
+import PropTypes from "prop-types";
 import useVoting from "../../../hooks/useUtilities/useVoting";
+
+// Prop Validation
+Vote.propTypes = {
+  commentType: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  isCurrentUser: PropTypes.bool.isRequired,
+};
 
 export default function Vote({ commentType, score, isCurrentUser }) {
   const upvoteID = useId();

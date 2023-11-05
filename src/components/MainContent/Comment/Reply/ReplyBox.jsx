@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
-export default function ReplyBox({ replyCard, isReplying, setisModified }) {
+ReplyBox.propTypes = {
+  replyCard: PropTypes.array.isRequired,
+};
+export default function ReplyBox({ replyCard }) {
   const [isExpanded, setisExpanded] = useState(true);
 
   const toggleComment = (e) => {
