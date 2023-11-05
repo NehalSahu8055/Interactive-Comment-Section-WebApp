@@ -66,6 +66,7 @@ export default function Vote({ commentType, score, isCurrentUser }) {
           "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
+        aria-disabled={isCurrentUser}
         aria-labelledby={upvoteID}
       >
         <span id={upvoteID} className="sr-only">
@@ -75,6 +76,8 @@ export default function Vote({ commentType, score, isCurrentUser }) {
           className=""
           src="/images/icon-plus.svg"
           aria-hidden="true"
+          width={11}
+          height={3}
           alt=""
         />
       </button>
@@ -95,12 +98,19 @@ export default function Vote({ commentType, score, isCurrentUser }) {
           "hover:brightness-50 hover:saturate-[5] dark:hover:brightness-75"
         }`}
         disabled={isCurrentUser}
+        aria-disabled={isCurrentUser}
         aria-labelledby={downvoteID}
       >
         <span id={downvoteID} className="sr-only">
           downvote this comment
         </span>
-        <img src="/images/icon-minus.svg" aria-hidden="true" alt="" />
+        <img
+          src="/images/icon-minus.svg"
+          aria-hidden="true"
+          width={11}
+          height={11}
+          alt=""
+        />
       </button>
     </div>
   );

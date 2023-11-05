@@ -10,7 +10,7 @@ export default {
       colors: {
         // light mode
         "moderate-blue": "#5457b6",
-        "soft-red": "#f8676d",
+        "soft-red": "#be4d52",
         "light-grayish-blue": "#c5d9ec",
         "pale-red": "#ff7171",
         "dark-blue": "#1b3247",

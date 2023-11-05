@@ -1,4 +1,4 @@
-import { useContext, useEffect, useId, useState } from "react";
+import { useContext, useEffect, useId, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
@@ -23,6 +23,7 @@ ReusableCard.propTypes = {
 };
 
 export default function ReusableCard({ person, type }) {
+  const sendUserID = useId();
   const { currentUserID } = useContext(CurrentUserContext);
   const {
     id,
@@ -138,6 +139,7 @@ export default function ReusableCard({ person, type }) {
 
   const filter = new Filter();
   const updateUserID = useId();
+  const confirmationModal = useRef();
 
   return (
     !isDeleting && (
@@ -167,6 +169,8 @@ export default function ReusableCard({ person, type }) {
                     className="w-8 rounded-full"
                     src={image}
                     alt={`User Avatar ${username}`}
+                    width={32}
+                    height={32}
                   />
                   <figcaption className="text-dark-blue dark:text-d-dark-blue">
                     {username}
@@ -239,15 +243,17 @@ export default function ReusableCard({ person, type }) {
                   <a
                     href="#"
                     className="cursor-pointer"
-                    aria-labelledby="send-userID"
+                    aria-labelledby={sendUserID}
                   >
-                    <span className="sr-only" id="send-userID">
+                    <span className="sr-only" id={sendUserID}>
                       Click this to view profile
                     </span>
                     <img
                       className="w-8 rounded-full"
                       src={image}
                       alt="user avatar"
+                      width={32}
+                      height={32}
                     />
                   </a>
                 )}

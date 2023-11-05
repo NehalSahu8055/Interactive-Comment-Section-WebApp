@@ -35,7 +35,7 @@ export default function UserSwitch() {
             key={`user${id}`}
             id={`user${id}`}
             onClick={() => userSwitch(id)}
-            className={`avatar w-9 overflow-visible border-none ring-2 ${
+            className={`avatar w-9 overflow-visible border-none ring-2 transition-all duration-700 ${
               currentUserID === id
                 ? "ring-moderate-blue dark:ring-d-moderate-blue"
                 : ""
@@ -79,7 +79,7 @@ export default function UserSwitch() {
               currentUserID === id ? "Current" : ""
             } User ${username}`}
           >
-            <img src={image} alt={username} />
+            <img src={image} alt={username} width={48} height={48} />
           </motion.button>
         );
       })}

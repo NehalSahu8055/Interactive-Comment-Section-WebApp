@@ -1,19 +1,22 @@
 import PropTypes from "prop-types";
 import iconButtonData from "../../../data/iconButtonData.json";
+import { useId } from "react";
 
-// Props Validation
+// Prop Validation
 IconButton.propTypes = {
   btnIndex: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
 };
 
 export default function IconButton({ btnIndex, action }) {
+  const iconButtonID = useId();
   const btn = iconButtonData[btnIndex];
 
   const handleClick = () => {
     // Handle delete button
     if (btn.id == 1) {
       document.getElementById("confirmation-modal").showModal();
+      document.getElementById("confirmation-modal").classList.remove("hidden");
     }
 
     // Handle edit button
@@ -42,9 +45,9 @@ export default function IconButton({ btnIndex, action }) {
       }  flex items-center capitalize  ${
         btn.id == 1 ? "btn-error btn-outline mr-2" : ""
       } `}
-      aria-labelledby={`iconButtonID${btn.id}`}
+      aria-labelledby={iconButtonID}
     >
-      <span id={`iconButtonID${btn.id}`} className="sr-only">
+      <span id={iconButtonID} className="sr-only">
         {btn.accessibleText}
       </span>
       <img
@@ -54,6 +57,8 @@ export default function IconButton({ btnIndex, action }) {
             : ""
         }`}
         src={btn.address}
+        width={btn.width}
+        height={btn.height}
         alt=""
       />
       <span

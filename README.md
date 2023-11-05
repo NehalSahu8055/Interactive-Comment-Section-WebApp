@@ -2,8 +2,8 @@
 
 ### 🔗 Links
 
-- Solution URL: [Click here]()
-- Live Site URL: [Click here]()
+- Solution URL: [Click here](https://github.com/NehalSahu8055)
+- Live Site URL: [Click here](https://interactive-comment-section-nehal.netlify.app/)
 
 ### 🛠️ Built with
 
@@ -14,13 +14,14 @@
 
 ### 🎨 Features
 
-- 🧏 Tested on windows OS with NVDA screen reader
-- ⌨️ Accessible with keyboard
 - 💯 Responsive
 - 🪁 Relative Source Font
 - 💈 Custom Scrollbar
 - ✨ Prettier Plugin
-- 🔁 Theme Mode with localStorage
+- 🔁 Theme Mode with `localStorage`
+- 🧏 Tested on windows OS with `NVDA & preinstalled screen reader`
+- ✔️ Tested with `linter` (eslint)
+- ⌨️ Accessible with keyboard
 
 ### 📜 What I learnt?
 
@@ -35,7 +36,7 @@
 - Switch Users
 - Theme Toggle with system pref + (manual + localstorage)
 - RealTime timestamp
-- Detect Censor words and make it `*`
+- Detect `Censor words` and make it `*`
 - Emoji Picker
 
 ### Future Updates
