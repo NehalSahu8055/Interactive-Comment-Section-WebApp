@@ -1,4 +1,4 @@
-import { useContext, useEffect, useId, useRef, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import PropTypes from "prop-types";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 import CurrentUserContext from "../../../../context/userContext/CurrentUserContext";
@@ -138,8 +138,6 @@ export default function ReusableCard({ person, type }) {
   }, [currentUserID]);
 
   const filter = new Filter();
-  const updateUserID = useId();
-  const confirmationModal = useRef();
 
   return (
     !isDeleting && (
@@ -159,11 +157,8 @@ export default function ReusableCard({ person, type }) {
               <a
                 href="#"
                 className="cursor-pointer rounded-full p-1 transition-all duration-500 hover:bg-light-gray dark:hover:bg-d-light-gray"
-                aria-labelledby={updateUserID}
+                aria-label="View ${username} profile"
               >
-                <span className="sr-only" id={updateUserID}>
-                  Click this to view profile
-                </span>
                 <figure className="flex items-center gap-4 pr-1  font-medium">
                   <img
                     className="w-8 rounded-full"

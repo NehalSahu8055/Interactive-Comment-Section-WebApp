@@ -15,6 +15,7 @@ export default function UserSwitch() {
   const comments = data.comments.map((item) => {
     return item;
   });
+  const delay = [0, 0.25, 0.5, 0.75, 1];
 
   return (
     <div className="avatar-group flex flex-col items-center justify-center space-y-4 overflow-visible">
@@ -29,19 +30,18 @@ export default function UserSwitch() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              delay: 0.25,
-              ease: [0, 0.71, 0.2, 1.01],
+              delay: delay[id],
             }}
             key={`user${id}`}
             id={`user${id}`}
             onClick={() => userSwitch(id)}
-            className={`avatar w-9 overflow-visible border-none ring-2 transition-all duration-700 ${
+            className={`avatar w-9 overflow-visible border-none ring-2 ${
               currentUserID === id
                 ? "ring-moderate-blue dark:ring-d-moderate-blue"
                 : ""
-            } duration-500  ${
+            } duration-200  ${
               id === userID ? "before:absolute" : "before:hidden"
-            } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
+            } ring-2 transition-[ring] before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
             aria-label={`${
               currentUserID === id ? "Current" : ""
             } User ${username}`}
@@ -56,14 +56,12 @@ export default function UserSwitch() {
           id,
           user: { username, image },
         } = person;
-
         return (
           <motion.button
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              delay: 0.25,
-              ease: [0, 0.71, 0.2, 1.01],
+              delay: delay[id],
             }}
             key={id}
             id={id}
@@ -72,9 +70,9 @@ export default function UserSwitch() {
               currentUserID === id
                 ? "ring-moderate-blue dark:ring-d-moderate-blue"
                 : ""
-            } duration-500  ${
+            } duration-200  ${
               id === userID ? "before:absolute" : "before:hidden"
-            } ring-2 before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
+            } ring-2 transition-[ring] before:-left-3 before:bottom-0 before:top-0 before:my-auto before:h-4 before:w-[5px] before:rounded-r-md before:bg-moderate-blue before:transition-all before:hover:h-3/4 dark:before:bg-d-moderate-blue md:w-12 `}
             aria-label={`${
               currentUserID === id ? "Current" : ""
             } User ${username}`}
