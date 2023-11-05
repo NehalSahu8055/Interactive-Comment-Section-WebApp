@@ -1,10 +1,10 @@
-import React from "react";
+import PropTypes from "prop-types";
 import iconButtonData from "../../../data/iconButtonData.json";
 
 export default function IconButton({ btnIndex, action }) {
   const btn = iconButtonData[btnIndex];
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     // Handle delete button
     if (btn.id == 1) {
       document.getElementById("confirmation-modal").showModal();
@@ -59,4 +59,10 @@ export default function IconButton({ btnIndex, action }) {
       </span>
     </button>
   );
+
+  // Props Validation
+  IconButton.PropTypes = {
+    btnIndex: PropTypes.number.isRequired,
+    action: PropTypes.func.isRequired,
+  };
 }
