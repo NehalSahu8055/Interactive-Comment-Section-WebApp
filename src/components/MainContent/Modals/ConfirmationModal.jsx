@@ -21,15 +21,12 @@ export default function ConfirmationModal({ setisModified, isDeleting }) {
   return (
     !isDeleting && (
       <dialog
+        role="dialog"
         id="confirmation-modal"
         className="modal hidden backdrop-blur-[0.15rem]"
         aria-modal="true"
-        // aria-hidden="true"
       >
-        <form
-          method="dialog"
-          className="modal-box max-w-[23rem] rounded-[0.32rem]"
-        >
+        <form className="modal-box max-w-[23rem] rounded-[0.32rem]">
           <h2 className="text-xl font-medium text-dark-blue dark:text-d-dark-blue">
             Delete comment
           </h2>
