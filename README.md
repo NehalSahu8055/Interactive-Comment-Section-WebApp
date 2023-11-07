@@ -38,13 +38,13 @@
 - RealTime timestamp
 - Detect `Censor words` and make it `*`
 - Emoji Picker
+- Hit `Enter key` to send the comment
 
 ### Future Updates
 
 - LocalStorage for comments
 - Making more accessible
 
-📈 Scored 99% on Google Pagespeed Insights!.
 
 ## ✒️Author
 
